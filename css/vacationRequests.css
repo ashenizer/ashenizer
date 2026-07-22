@@ -1,0 +1,671 @@
+/*************************
+ Vacation Request System
+*************************/
+
+.vacation-selected {
+
+    border: 2px solid #ec4899 !important;
+
+    background: rgba(
+        236,
+        72,
+        153,
+        0.20
+    ) !important;
+
+    box-shadow:
+        0 0 15px rgba(
+            236,
+            72,
+            153,
+            0.35
+        );
+}
+
+.leave-month-navigation {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.leave-request-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+}
+
+#additional-days-section {
+
+    margin-top: 15px;
+}
+
+/* Requested Leave */
+
+/* 🌴 Requested Leave */
+
+.calendar-entry.requested {
+  background: linear-gradient(
+    145deg,
+    #e5e7eb,
+    #d1d5db
+  );
+
+  color: #374151;
+
+  padding: 6px 10px;
+
+  border-radius: 10px;
+
+  border: 1px solid #cbd5e1;
+
+  box-shadow:
+    0 3px 8px rgba(0,0,0,0.08);
+
+  font-weight: 600;
+
+  margin-top: 4px;
+
+  transition: all 0.2s ease;
+}
+
+.calendar-entry.requested:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.12);
+}
+
+.leave-month-header {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin: 15px 0 25px;
+
+    width: 100%;
+}
+
+#leave-month-title {
+
+    display: inline-block;
+
+    padding: 10px 24px;
+
+    background: linear-gradient(
+        135deg,
+        #ffb6d9,
+        #ffd6eb
+    );
+
+    color: #7b2f5f;
+
+    border-radius: 30px;
+
+    font-weight: 700;
+
+    font-size: 18px;
+
+    letter-spacing: 0.5px;
+
+    box-shadow:
+        0 0 18px rgba(
+            255,
+            182,
+            217,
+            0.45
+        );
+}
+
+.leave-request-group input[type="date"] {
+
+    background: #fff5fb;
+
+    border: 2px solid #f6b4d8;
+
+    border-radius: 14px;
+
+    padding: 12px;
+
+    color: #7b2f5f;
+
+    font-weight: 600;
+
+    transition: all 0.25s ease;
+}
+
+.leave-request-group input[type="date"]:focus {
+
+    outline: none;
+
+    border-color: #ec4899;
+
+    box-shadow:
+        0 0 15px rgba(
+            236,
+            72,
+            153,
+            0.25
+        );
+}
+
+#request-selected-date {
+
+    text-align: center;
+
+    font-weight: 700;
+
+    color: #f9a8d4;
+
+    background: rgba(
+        249,
+        168,
+        212,
+        0.12
+    );
+
+    border-radius: 12px;
+
+    padding: 10px;
+
+    margin-bottom: 18px;
+}
+
+#leave-request-modal .modal-content {
+
+    height: 80vh;
+
+    max-height: 800px;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #f9a8d4
+        transparent;
+}
+
+#extra-days-reason {
+
+    width: 100%;
+
+    min-height: 100px;
+
+    resize: vertical;
+
+    background: #fff5fb;
+
+    border: 2px solid #f6b4d8;
+
+    border-radius: 16px;
+
+    padding: 12px;
+
+    color: #7b2f5f;
+
+    font-weight: 600;
+
+    font-family: inherit;
+
+    transition: all .25s ease;
+}
+
+#extra-days-reason:focus {
+
+    outline: none;
+
+    border-color: #ec4899;
+
+    box-shadow:
+        0 0 16px rgba(
+            236,
+            72,
+            153,
+            .25
+        );
+}
+
+
+#leave-request-modal .modal-content::-webkit-scrollbar {
+
+    width: 8px;
+}
+
+#leave-request-modal .modal-content::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+#leave-request-modal .modal-content::-webkit-scrollbar-thumb {
+
+    background: #f9a8d4;
+
+    border-radius: 999px;
+}
+
+#add-more-days {
+
+    transition: all .25s ease;
+}
+
+#add-more-days:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 16px rgba(
+            236,
+            72,
+            153,
+            .25
+        );
+}
+
+/*************************
+ Leave Email Modal
+*************************/
+
+#leave-email-modal .modal-content {
+
+    max-width: 850px;
+
+    width: 92%;
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+}
+
+.leave-email-banner {
+
+    text-align: center;
+
+    margin-bottom: 22px;
+}
+
+.leave-email-icon {
+
+    font-size: 52px;
+
+    margin-bottom: 10px;
+}
+
+.leave-email-banner h3 {
+
+    color: #ec4899;
+
+    margin-bottom: 10px;
+
+    font-size: 24px;
+}
+
+.leave-email-banner p {
+
+    color: #7b2f5f;
+
+    margin-bottom: 12px;
+
+    line-height: 1.6;
+}
+
+.leave-email-reminder {
+
+    margin-top: 16px;
+
+    padding: 18px;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #fff0f7,
+        #ffe4f2
+    );
+
+    border: 2px solid #f9a8d4;
+
+    color: #be185d;
+
+    font-weight: 700;
+
+    line-height: 1.8;
+
+    box-shadow:
+        0 8px 20px rgba(
+            236,
+            72,
+            153,
+            .15
+        );
+}
+
+#leave-email-preview {
+
+   overflow-y: auto;
+
+    width: 100%;
+
+    min-height: 350px;
+
+    background: #fff8fc;
+
+    border: 2px solid #f6b4d8;
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    color: #7b2f5f;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    font-family:
+        "Quicksand",
+        sans-serif;
+
+    resize: none;
+
+    box-shadow:
+        inset 0 2px 8px rgba(
+            236,
+            72,
+            153,
+            .08
+        );
+}
+
+#leave-email-preview:focus {
+
+    outline: none;
+
+    border-color: #ec4899;
+}
+
+#leave-email-modal .modal-content {
+
+    max-width: 850px;
+
+    width: 92%;
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    scrollbar-width: none;
+}
+
+#leave-email-modal .modal-content::-webkit-scrollbar {
+    display: none;
+}
+/*************************
+ Leave Success Modal
+*************************/
+
+.leave-success-card {
+
+    text-align: center;
+}
+
+.success-icon {
+
+    font-size: 48px;
+
+    margin-bottom: 12px;
+}
+
+.success-note {
+
+    background: linear-gradient(
+        135deg,
+        #fff0f7,
+        #ffe4f0
+    );
+
+    border: 2px solid #f9a8d4;
+
+    border-radius: 16px;
+
+    padding: 16px;
+
+    margin: 20px 0;
+
+    color: #9d174d;
+
+    font-weight: 600;
+
+    line-height: 1.6;
+}
+
+.leave-email-banner {
+
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.leave-email-icon {
+
+    font-size: 48px;
+
+    margin-bottom: 12px;
+}
+
+.leave-email-reminder {
+
+    margin-top: 16px;
+
+    padding: 16px;
+
+    border-radius: 18px;
+
+    background: linear-gradient(
+        135deg,
+        #fff0f7,
+        #ffe4f2
+    );
+
+    border: 2px solid #f9a8d4;
+
+    color: #be185d;
+
+    font-weight: 700;
+
+    line-height: 1.8;
+}
+
+#copy-leave-email {
+
+    background: linear-gradient(
+        135deg,
+        #ec4899,
+        #f472b6
+    );
+
+    border: none;
+
+    color: white;
+
+    font-weight: 700;
+
+    transition: all .25s ease;
+}
+
+#copy-leave-email:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(
+            236,
+            72,
+            153,
+            .35
+        );
+}
+
+/*************************
+ Email Copied Modal
+*************************/
+
+.email-copied-card {
+
+    text-align: center;
+
+    max-width: 500px;
+}
+
+.email-copied-stars {
+
+    font-size: 24px;
+
+    margin-bottom: 10px;
+
+    animation: sparkle 2s infinite;
+}
+
+.email-copied-icon {
+
+    font-size: 56px;
+
+    margin-bottom: 12px;
+}
+
+.email-copied-card h3 {
+
+    color: #ec4899;
+
+    margin-bottom: 10px;
+}
+
+.email-copied-card p {
+
+    color: #7b2f5f;
+
+    margin-bottom: 16px;
+}
+
+.email-copied-message {
+
+    background: linear-gradient(
+        135deg,
+        #fff0f7,
+        #ffe4f2
+    );
+
+    border: 2px solid #f9a8d4;
+
+    border-radius: 20px;
+
+    padding: 18px;
+
+    color: #be185d;
+
+    font-weight: 700;
+
+    line-height: 1.8;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 8px 20px rgba(
+            236,
+            72,
+            153,
+            .15
+        );
+}
+
+@keyframes sparkle {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.leave-email-subject-card {
+
+    margin: 16px 0;
+
+    padding: 18px;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+        135deg,
+        #fff0f7,
+        #ffe4f2
+    );
+
+    border: 2px solid #f9a8d4;
+
+    text-align: center;
+}
+
+.leave-email-subject-label {
+
+    font-size: 14px;
+
+    color: #be185d;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+.leave-email-subject {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    color: #ec4899;
+
+    letter-spacing: 1px;
+}
+
+/********* Dark Theme *************/
+
+/* 🌙 Requested Leave */
+
+body.dark .calendar-entry.requested {
+  background: linear-gradient(
+    145deg,
+    #475569,
+    #334155
+  );
+
+  color: #f8fafc;
+
+  border: 1px solid #64748b;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.35);
+}
+
+body.dark .calendar-entry.requested:hover {
+  box-shadow:
+    0 6px 18px rgba(148,163,184,0.25);
+}

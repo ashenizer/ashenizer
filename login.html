@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>My First Website</title>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/forgot.css">
+	</head>
+	<body>
+		<div class="page-grid">
+			<header>
+				<div class="header-container">
+					<h1 class="logo" ><a href="index.html"><img src="assets/logo.png"></a></h1>
+					<nav>
+						<ul>
+							
+<li>
+  <button id="go-register" class="nav-btn">
+    Register
+  </button>
+</li>
+
+							<li>
+								
+<div class="login-theme-toggle">
+  <span id="theme-label">Dark Mode</span>
+  <label class="theme-switch">
+    <input type="checkbox" id="theme-toggle" />
+    <span class="slider"></span>
+  </label>
+</div>
+
+							</li>
+						</ul>
+					</nav>
+
+				</div>
+			</header>
+
+			<main class="login-page">
+				<section class="login-card">
+					<div class="flower-decor flower-top-left">🌸</div>
+					<div class="flower-decor flower-bottom-right">🌺</div>
+					<div id="error-popup" class="popup hidden">
+  						<div class="popup-content">
+    							🌸 <span id="popup-message"></span> 🌸
+  						</div>
+					</div>	
+					
+					<h2>Employee Login</h2>
+					<form id="login-form">
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" id="email" required />
+						</div>
+						
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" id="password" required />
+						</div>
+
+						<!-- Fake login for now -->
+						<center>
+							<button
+                                                            type="submit"
+                                                            class="login-btn"
+                                                            id="login-btn">
+								Login
+							</button>
+						</center>
+						<center class="forgot">
+
+
+<a href="#" id="forgot-password" class="forgot-link">
+  Forgot Password?
+</a>
+
+
+						</center>
+</form>
+</section>
+</main>
+
+<div id="forgot-modal" class="modal hidden">
+  <div class="modal-content">
+
+    <h4>🌸 Password Reset Request</h4>
+
+    <input
+      id="fp-email"
+      type="email"
+      placeholder="Company Email"
+    >
+
+<input
+  id="fp-new-password"
+  type="password"
+  placeholder="Requested New Password 🔐"
+/>
+
+    <textarea
+      id="fp-reason"
+      placeholder="Briefly tell us why you need a password reset 💌"
+    ></textarea>
+
+    <div class="modal-actions">
+
+      <button
+        id="fp-submit"
+        class="nav-btn btn-primary"
+      >
+        Send Request 💖
+      </button>
+
+      <button
+        id="fp-close"
+        class="nav-btn"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 Piamonte
+</footer>
+
+</div> <!-- page-grid -->
+	
+
+
+
+	
+		
+
+<!-- ✅ Firebase (COMPAT) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+<!-- ✅ YOUR CONFIG -->
+<script src="js/core/firebase.js"></script>
+
+<!-- ✅ YOUR APP -->
+<script src="js/core/data.js"></script>
+<script src="js/core/auth.js"></script>
+<script src="js/features/incentives.js"></script>
+<script src="js/auth/forgot.js"></script>
+<script src="js/components/theme.js"></script>
+<script src="js/components/header.js"></script>
+<script src="js/pages/profile.js"></script>
+<script src="js/features/leave.js"></script>
+<script src="js/features/ranking.js"></script>
+<script src="js/roles/employee.js"></script>
+<script src="js/roles/tl.js"></script>
+<script src="js/pages/ui-charts.js"></script>
+<script src="js/pages/ui.js"></script>
+<script src="js/core/app.js"></script>
+<script src="js/role/admin.js"></script>
+
+
+
+	</body>
+</html>

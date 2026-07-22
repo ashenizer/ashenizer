@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GOD MODE</title>
+
+  <link rel="stylesheet" href="css/god.css">
+  <link rel="stylesheet" href="css/reponsive.css">
+
+  <!-- Futuristic font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body class="god-body">
+
+  <div class="god-container">
+
+    <!-- HEADER -->
+    <header class="god-header">
+      <h1>⚡ CONTROL PANEL</h1>
+      <button id="god-logout">Logout</button>
+    </header>
+
+    <!-- MAIN -->
+    <main class="god-main">
+
+      <div class="core-ui">
+
+  <!-- CENTER GLOBE -->
+  <div class="globe-container">
+    <div class="globe"></div>
+
+<div class="core-status">
+
+  <div class="core-title">
+    SYSTEM ONLINE
+  </div>
+
+  <div class="core-line">
+    REQUESTS
+    <span id="core-requests">
+      0
+    </span>
+  </div>
+
+  <div class="core-line">
+    STATUS
+    <span>
+      ACTIVE
+    </span>
+  </div>
+
+  <div class="core-line">
+    SYNC
+    <span>
+      LIVE
+    </span>
+  </div>
+
+</div>
+    <div class="ring orbit-ring" id="orbit-ring">
+
+      <!-- ORBIT BUTTONS -->
+<div class="orbit-btn" data-panel="requests" data-label="Password Requests">
+  <div class="orbit-inner">🔐</div>
+  <div class="orbit-tooltip"></div>
+</div>
+
+<div class="orbit-btn" data-panel="logs" data-label="System Logs">
+  <div class="orbit-inner">📄</div>
+  <div class="orbit-tooltip"></div>
+</div>
+
+<div class="orbit-btn" data-panel="system" data-label="System Control">
+  <div class="orbit-inner">⚙️</div>
+  <div class="orbit-tooltip"></div>
+</div>
+
+<div class="orbit-btn" data-panel="resources" data-label="Resources">
+  <div class="orbit-inner">📦</div>
+  <div class="orbit-tooltip"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- PANELS (HIDDEN BY DEFAULT) -->
+<div class="panel-container">
+
+  <div class="panel hidden" id="panel-requests">
+<h3 class="panel-title">
+  Password Requests
+  <span id="request-count" class="count-badge">
+    0
+  </span>
+</h3>
+    <div id="god-requests"></div>
+  </div>
+
+  <div class="panel hidden" id="panel-logs">
+    <h3>System Logs</h3>
+  </div>
+
+<div class="panel hidden" id="panel-system">
+  <h3>System Control</h3>
+</div>
+
+<div class="panel hidden" id="panel-resources">
+  <h3>Resources</h3>
+</div>
+
+</div>
+
+    </main>
+
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+  <script src="js/core/firebase.js"></script>
+
+  <!-- GOD SCRIPTS -->
+  <script src="js/god/god-ui.js"></script>
+  <script src="js/god/god.js"></script>
+
+</body>
+</html>

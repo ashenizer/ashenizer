@@ -1,0 +1,190 @@
+
+window.App = window.App || {};
+App.ui = {};
+
+App.ui.populateAgentDropdown = function () {
+  const select = document.getElementById("agent-select");
+  if (!select) return;
+
+  select.innerHTML = `<option value="">-- Select Agent --</option>`;
+
+  for (let email in App.data.users) {
+    if (App.data.users[email].role === "employee") {
+      const opt = document.createElement("option");
+      opt.value = email;
+      opt.textContent = App.data.users[email].name;
+      select.appendChild(opt);
+    }
+  }
+};
+
+App.ui.renderHistory = function (email) {
+  const body = document.getElementById("history-body");
+  const history = App.data.statsStore[email]?.history || [];
+
+  body.innerHTML = history
+    .map(
+      e => `
+      <tr>
+        <td>${e.date}</td>
+        <td>${e.QA}</td>
+        <td>${e.AHT}</td>
+        <td>${e.Attendance}</td>
+      </tr>`
+    )
+    .join("");
+};
+
+
+window.toggleRegisterPanel = function () {
+  document.getElementById("register-body")?.classList.toggle("hidden");
+};
+
+window.registerEmployee = function () {
+  const name = document.getElementById("new-name").value.trim();
+  const email = document.getElementById("new-email").value.trim();
+  if (!name || !email) return alert("Missing fields");
+
+  App.data.users[email] = { role: "employee", name };
+  App.data.saveUsers();
+  alert("Employee registered");
+  location.reload();
+};
+
+
+
+window.saveEmployeeStats = function () {
+  const email = document.getElementById("agent-select").value;
+  const qa = document.getElementById("input-qa").value.trim();
+  const aht = document.getElementById("input-aht").value.trim();
+  const att = document.getElementById("input-attendance").value.trim();
+  const date = document.getElementById("input-date").value;
+
+  if (!email || !qa || !aht || !att || !date) {
+    alert("Please fill in all fields");
+    return;
+  }
+
+  if (!App.data.statsStore[email]) {
+    App.data.statsStore[email] = { history: [], current: {} };
+  }
+
+  const entry = { date, QA: qa, AHT: aht, Attendance: att };
+
+  App.data.statsStore[email].history.push(entry);
+  App.data.statsStore[email].current = entry;
+
+  App.data.saveStats();
+
+  // ✅ Update selected agent stats immediately
+  document.getElementById("selected-qa").textContent = qa;
+  document.getElementById("selected-aht").textContent = aht;
+  document.getElementById("selected-attendance").textContent = att;
+  document.getElementById("selected-agent-stats").classList.remove("hidden");
+
+  // ✅ Update team stats
+  const teamStats = App.data.calculateTeamStats();
+  if (teamStats) {
+    document.getElementById("team-qa").textContent = teamStats.qa;
+    document.getElementById("team-aht").textContent = teamStats.aht;
+  }
+
+  alert("Stats saved ✅");
+};
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const agentSelect = document.getElementById("agent-select");
+  const saveBtn = document.getElementById("save-stats-btn");
+
+  if (!agentSelect || !saveBtn) return;
+
+  agentSelect.addEventListener("change", () => {
+    saveBtn.disabled = agentSelect.value === "";
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const agentSelect = document.getElementById("agent-select");
+  if (!agentSelect) return;
+
+  agentSelect.addEventListener("change", () => {
+    const email = agentSelect.value;
+
+    const selectedSection = document.getElementById("selected-agent-stats");
+    const historySection = document.getElementById("agent-history");
+
+    if (!email) {
+      selectedSection?.classList.add("hidden");
+      historySection?.classList.add("hidden");
+      return;
+    }
+
+    const stats = App.data.statsStore[email]?.current;
+
+    document.getElementById("selected-qa").textContent =
+      stats?.QA || "—";
+    document.getElementById("selected-aht").textContent =
+      stats?.AHT || "—";
+    document.getElementById("selected-attendance").textContent =
+      stats?.Attendance || "—";
+
+    selectedSection.classList.remove("hidden");
+
+    // Render history table
+    
+App.ui.renderHistory = function (email) {
+  const body = document.getElementById("history-body");
+  const history = App.data.statsStore[email]?.history || [];
+
+  body.innerHTML = history
+    .map(
+      e => `
+      <tr>
+        <td>${e.date}</td>
+        <td>${e.QA}</td>
+        <td>${e.AHT}</td>
+        <td>${e.Attendance}</td>
+      </tr>`
+    )
+    .join("");
+
+  document
+    .getElementById("agent-history")
+    .classList.toggle("hidden", history.length === 0);
+};
+
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* Toggle register panel */
+  const toggleBtn = document.getElementById("toggleRegisterPanel");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      document
+        .getElementById("register-body")
+        ?.classList.toggle("hidden");
+    });
+  }
+
+  /* Register employee */
+  const registerBtn = document.getElementById("registerEmployee");
+  if (registerBtn) {
+    registerBtn.addEventListener("click", App.ui.registerEmployee);
+  }
+
+  /* Save stats */
+  const saveStatsBtn = document.getElementById("save-stats-btn");
+  if (saveStatsBtn) {
+    saveStatsBtn.addEventListener("click", App.ui.saveEmployeeStats);
+  }
+
+});
+
+

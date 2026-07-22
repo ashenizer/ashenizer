@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>UI index</title>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/gallery.css">
+		<link rel="stylesheet" href="css/vacationRequests.css">
+		<link rel="stylesheet" href="css/whatsNew.css">
+		<link rel="stylesheet" href="css/forgot.css">
+		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Nunito:wght@300;400;700&family=Pacifico&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="page-grid">
+			<header>
+				<div class="header-container">
+					<!-- Navigation Practice for Header nav -->
+					<h1 class="logo" ><a href="ui.html"><img src="assets/logo.png"></a></h1>
+					<nav>
+						<ul class="nav-left">
+							<li><a href="#">How it Works</a></li>
+							<li><a href="#">Insight</a></li>
+							
+							
+						</ul>
+						
+
+
+
+<div class="nav-right">
+
+  <!-- 👤 PROFILE -->
+  <div class="profile-container">
+
+    <img
+      id="profile-pic"
+      src="default-avatar.png"
+      class="profile-pic"
+      alt="Profile"
+    />
+
+    <!-- ✅ PROFILE DROPDOWN (INSIDE profile-container) -->
+    
+<div id="profile-dropdown" class="dropdown hidden">
+
+  <button id="upload-pic" class="dropdown-item">
+    Upload Picture 📷
+  </button>
+
+  <input type="file" id="profile-upload" accept="image/*" hidden />
+
+
+<button id="upload-caricature" class="dropdown-item">
+  Upload Caricature 🎨
+</button>
+
+<input type="file" id="caricature-upload" accept="image/*" hidden />
+
+
+  <!-- ✅ ADD THIS -->
+  
+<div class="dropdown-item theme-toggle-wrapper">
+
+  <span id="profile-theme-label">Dark Mode</span>
+
+  <label class="theme-switch">
+    <input type="checkbox" id="profile-theme-toggle" />
+    <span class="slider"></span>
+  </label>
+
+</div>
+
+
+  <button id="logout-btn" class="dropdown-item danger">
+    Logout 🚪
+  </button>
+
+</div>
+
+
+  </div>
+
+  <!-- ︙ MENU BUTTON -->
+  <button id="menu-btn" class="menu-icon">
+    &#8942;
+  </button>
+
+  <!-- ✅ MENU DROPDOWN (direct inside nav-right) -->
+  <div id="menu-dropdown" class="dropdown hidden">
+    <button class="dropdown-item">Settings ⚙️</button>
+    <button class="dropdown-item">Help ❓</button>
+  </div>
+
+</div>
+
+</nav>
+
+
+</header>
+
+<div class="whats-new-banner" id="open-whats-new">
+
+<div class="whats-new-card">
+
+    <div
+        class="whats-new-badge"
+        id="release-version"
+    ></div>
+
+    <h3 id="release-title"></h3>
+
+    <p id="release-summary"></p>
+
+    <span class="whats-new-link">
+        View Updates →
+    </span>
+
+</div>
+</div>
+<main class="dashboard">
+			<aside class="dashboard-sidebar">
+				<h3>Dashboard</h3>	
+			
+   					<!-- ✅ TEAM LEAD SIDEBAR PANEL -->
+   					<div class="admin-card mt-40 hidden" id="register-employee-panel">
+
+						<div class="admin-card-header">
+							<h4>Team Lead Tools</h4>
+							<button
+								class="toggle-btn"
+								id="toggleRegisterPanel"
+								aria-label="Toggle Register Employee"
+							>
+								+
+							</button>
+						</div>
+						<div class="admin-card-body" id="register-body">
+							<h5>Register New Employee</h5>
+
+							<!-- Existing register form goes here -->
+							<div class="form-group">
+								<label for="new-name">Full Name</label>
+								<input type="text" id="new-name" placeholder="Employee Name" />
+							</div>
+							<div class="form-group">
+								<label for="new-email">Email</label>
+								<input type="email" id="new-email" placeholder="employee@company.com" />
+							</div>
+
+<div class="form-group">
+  <label for="new-password">Password</label>
+  <input type="password" id="new-password" placeholder="Enter password" />
+</div>
+
+							<button
+								type="button"
+								class="nav-btn btn-primary w-100"
+								id="registerEmployee"
+							>
+								Register
+							</button>
+							<p id="register-preview" class="text-muted mt-10"></p>
+						</div>
+					</div>	
+
+
+<ul id="employee-menu" class="mt-20">
+  
+<li>
+
+<button class="menu-btn" data-section="dashboard">
+  📊 Performance
+</button>
+
+</li>
+
+  
+  <li><button class="menu-btn" data-section="reminder">⚠️ Reminder</button></li>
+  <li><button class="menu-btn" data-section="achievement">🏆 Achievements</button></li>
+  <li><button class="menu-btn" data-section="leave">🌴 Leave</button></li>
+
+
+  <li><button class="menu-btn" data-section="feedback">💬 Suggestions</button></li>
+
+ <li>
+
+  <button class="menu-btn" data-section="gallery">
+    📸 Happy Snaps
+  </button>
+</li>
+</ul>
+			
+
+
+			</aside>
+
+
+			<section class="dashboard-content">
+				<h2 id="welcome"></h2>
+				<p class="text-muted fw-bold" id="role-badge"></p>
+				
+
+
+
+
+<!-- 👑 GOD MODE PANEL -->
+<div id="admin-panel" class="hidden mt-40">
+
+  <h3>Password Reset Requests</h3>
+
+  <div id="password-requests"></div>
+
+</div>
+
+
+
+				
+<!-- ✅ SHARED PERFORMANCE GRAPH -->
+<div id="performance-chart-section" class="stat-card mt-40 hidden">
+
+
+<!-- ✅ TAB HEADER -->
+<div class="chart-tabs">
+  <button class="tab-btn active" data-tab="agent">
+      Monthly Performance
+  </button>
+
+  <button class="tab-btn" data-tab="ytd">
+    Year to Date
+  </button>
+</div>
+
+  
+<div class="flex-between">
+  <h3 id="chart-title">Agent vs Team Performance</h3>
+
+  <div class="chart-toggle">
+    <button id="toggle-daily" class="nav-btn active">Daily</button>
+    <button id="toggle-monthly" class="nav-btn">Monthly</button>
+  </div>
+
+<div class="chart-toggle mt-10">
+  <button id="metric-qa" class="nav-btn active">QA</button>
+  <button id="metric-aht" class="nav-btn">AHT</button>
+  <button id="metric-att" class="nav-btn">Attendance</button>
+</div>
+
+</div>
+
+  <canvas id="performanceChart" height="120"></canvas>
+</div>
+
+
+
+				<!-- Employee View -->
+				<div id="employee-view" class="hidden">
+
+<!-- 🏆 RANKING SECTION -->
+<div id="ranking-section" class="ranking-container">
+
+  <!-- TOP EMPLOYEE -->
+  
+<div class="compare-row main-compare">
+
+  <!-- LEFT: YOU -->
+  <div class="compare-box left-box">
+    <h4>You</h4>
+    <p>QA: <span id="you-qa"></span></p>
+    <p>AHT: <span id="you-aht"></span></p>
+    <p>Att: <span id="you-att"></span></p>
+  </div>
+
+  <!-- CENTER: TOP AGENT IMAGE -->
+  <div class="compare-center">
+    <img id="rank-1-img" class="rank-img" />
+    <p id="rank-1-name"></p>
+  </div>
+
+  <!-- RIGHT: TOP AGENT -->
+  <div class="compare-box right-box">
+    <h4>Top Agent</h4>
+    <p>QA: <span id="top-qa"></span></p>
+    <p>AHT: <span id="top-aht"></span></p>
+    <p>Att: <span id="top-att"></span></p>
+  </div>
+
+
+
+</div>
+
+<div class="rank-grid">
+
+    <div class="rank-item">
+      <div id="rank-qa-img" class="rank-img-small"></div>
+      <p>Best QA</p>
+      <span id="rank-qa-name"></span>
+    </div>
+
+    <div class="rank-item">
+      <img src="default-avatar.png" id="rank-aht-img" class="rank-img-small"/>
+      <p>Best AHT</p>
+      <span id="rank-aht-name"></span>
+    </div>
+
+    <div class="rank-item">
+      <div id="rank-att-img" class="rank-img-small"></div>
+      <p>Best Attendance</p>
+      <span id="rank-att-name"></span>
+    </div>
+
+  </div>
+
+
+
+
+  </div>
+
+  <!-- LOWER GRID -->
+  
+
+
+<!-- 📢 BULLETIN BOARD -->
+<div id="bulletin-section" class="hidden">
+
+  <div class="stat-card mt-40">
+    <h3>📢 What's New</h3>
+
+    <div id="bulletin-list">
+      <div class="bulletin-item">
+        <p class="fw-bold">🎉 New Feature Released</p>
+        <p class="text-muted">You can now view your performance chart!</p>
+      </div>
+
+      <div class="bulletin-item">
+        <p class="fw-bold">⚠️ Reminder</p>
+        <p class="text-muted">Submit reports before Friday</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+				   <div id="section-dashboard" class="dashboard-section hidden">
+					<h3>Your Personal Stats</h3>
+					
+
+
+
+<div class="stats-grid">
+
+  <div class="stat-card">
+<select id="employee-qpb-month-select">
+</select>
+<p class="stat-label">💰 QPB Incentive</p>
+<div id="quarterly-incentives"></div>
+
+<p class="stat-value" id="employee-qpb">₱0</p>
+
+
+
+
+<p id="employee-qpb-grade">—</p>
+
+</div>
+
+  <div class="stat-card">
+    <p class="stat-label">QA</p>
+    <p class="stat-value" id="qa">—</p>
+
+    <div id="qa-sub-boxes-personal" class="qa-sub-grid hidden">
+      <div class="sub-box">
+        <p class="sub-label">Disability</p>
+        <p class="sub-value" id="qa-dis">—</p>
+      </div>
+
+      <div class="sub-box">
+        <p class="sub-label">Commercial</p>
+        <p class="sub-value" id="qa-com">—</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <p class="stat-label">AHT</p>
+    <p class="stat-value" id="aht">—</p>
+  </div>
+
+  <div class="stat-card">
+    <p class="stat-label">Attendance</p>
+    <p class="stat-value" id="attendance">—</p>
+  </div>
+
+</div>
+
+<div id="employee-note-card" class="stat-card mt-20 hidden">
+
+  <h3>💬 Team Lead Notes</h3>
+
+  <div id="employee-note-display">
+    No notes available.
+  </div>
+
+</div>
+
+
+<!-- ✅ EMPLOYEE HISTORY (ADD THIS) -->
+<div id="employee-history" class="mt-40 hidden">
+  <h4>Performance History</h4>
+
+  <div class="stat-card">
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>QA</th>
+          <th>AHT</th>
+          <th>Attendance</th>
+        </tr>
+      </thead>
+      <tbody id="employee-history-body"></tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+  <!-- ✅ REMINDER -->
+  <div id="section-reminder" class="dashboard-section hidden">
+    <h3>Important Reminder</h3>
+    <p>⚠️ Submit your reports before Friday</p>
+  </div>
+
+
+  <!-- ✅ ACHIEVEMENTS -->
+  <div id="section-achievement" class="dashboard-section hidden">
+
+
+    <h3>Achievements</h3>
+    <p>🏆 Top Performer this month</p>
+  </div>
+
+<!-- ✅ HAPPY SNAPS -->
+
+  
+  <!-- ✅ FEEDBACK -->
+  <div id="section-feedback" class="dashboard-section hidden">
+    <h3>Suggestions & Complaints</h3>
+    <textarea id="feedback-input" class="w-100"></textarea>
+    <button id="submit-feedback">Submit</button>
+    <ul id="feedback-list"></ul>
+  </div>
+
+<!-- ✅ Employee Performance History -->
+					
+
+				</div>
+
+</div>
+
+<div id="section-leave" class="dashboard-section hidden">
+
+  <h3>🌴 Vacation Leave</h3>
+
+  <!-- ✅ Month Switch -->
+  <select id="calendar-month" class="mt-10 styled-select"></select>
+
+  <!-- ✅ Calendar -->
+
+<div class="calendar-container mt-20">
+
+  <div class="calendar-header">
+    <div>Sunday</div>
+    <div>Monday</div>
+    <div>Tuesday</div>
+    <div>Wednesday</div>
+    <div>Thursday</div>
+    <div>Friday</div>
+    <div>Saturday</div>
+  </div>
+
+  <div id="calendar-grid" class="calendar-grid"></div>
+
+</div>
+
+
+</div>
+
+
+<div id="section-gallery" class="dashboard-section hidden">
+
+  <h2>📸 Happy Snaps</h2>
+
+  <p class="gallery-subtitle">
+    Share team moments, celebrations, achievements, and memories 💖
+  </p>
+
+<div class="happy-snaps-upload">
+
+    <label for="gallery-upload">
+      🌸 Click to upload your happy moments
+    </label>
+
+    <input
+      type="file"
+      id="gallery-upload"
+      accept="image/*"
+      multiple
+      hidden
+    />
+
+</div>
+
+  <div id="gallery-grid" class="gallery-grid"></div>
+
+<div id="gallery-modal" class="gallery-modal hidden">
+
+  <span id="gallery-close">&times;</span>
+
+  <button
+    id="gallery-prev"
+    class="gallery-nav"
+  >
+    ‹
+  </button>
+
+  <img
+    id="gallery-modal-image"
+    class="gallery-modal-image"
+  />
+
+  <button
+    id="gallery-next"
+    class="gallery-nav"
+  >
+    ›
+  </button>
+
+</div>
+
+<!-- 🌸 Upload Preview Modal -->
+
+<div id="gallery-upload-modal" class="gallery-modal hidden">
+
+  <div class="gallery-upload-card">
+
+    <h3>🌸 Create Happy Snap</h3>
+
+  
+    <img
+  id="gallery-preview-image"
+  class="gallery-preview-image"
+/>
+
+    
+
+    <textarea
+      id="gallery-popup-caption"
+      placeholder="Share something sweet about this memory 💖"
+    ></textarea>
+
+    <div class="modal-actions">
+
+      <button
+        id="gallery-post-btn"
+        class="nav-btn btn-primary"
+      >
+        Post 💖
+      </button>
+
+      <button
+        id="gallery-cancel-btn"
+        class="nav-btn btn-danger"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+</div>			
+					
+<!-- Team Lead View -->
+				<div id="lead-view" class="hidden">
+
+
+    					<h3>Team Performance</h3>
+
+    					<!-- ✅ TEAM STATS -->
+   					<div class="stat-card" id="team-qa-card">
+        <div class="stat-label">TEAM QA</div>
+        <div class="stat-value team-qa-value" id="team-qa-value">--</div>
+    </div>
+
+    <div class="stat-card" id="team-aht-card">
+        <div class="stat-label">TEAM AHT</div>
+        <div class="stat-value team-aht-value" id="team-aht-value">--</div>
+    </div>
+
+    <div class="stat-card" id="team-attendance-card">
+        <div class="stat-label">TEAM ATTENDANCE</div>
+        <div class="stat-value team-attendance-value" id="team-attendance-value">--</div>
+    </div>
+				
+				
+
+					
+    				</div>
+
+
+
+   				 <!-- ✅ SELECTED AGENT SECTION (NOW UNDER TEAM STATS) -->
+    				 
+				<div id="selected-agent-stats" class="hidden mt-40">
+  					<h3 id="selected-agent-title">Selected Agent Performance</h3>
+
+
+        				<div class="stats-grid">
+            					
+
+  <div class="stat-card">
+    <p class="stat-label">QA</p>
+    <p class="stat-value" id="selected-qa">—</p>
+
+    <div id="qa-sub-boxes" class="qa-sub-grid hidden">
+      <div class="sub-box">
+        <p class="sub-label">Disability</p>
+        <p class="sub-value" id="selected-qa-dis">—</p>
+      </div>
+
+      <div class="sub-box">
+        <p class="sub-label">Commercial</p>
+        <p class="sub-value" id="selected-qa-com">—</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <p class="stat-label">AHT</p>
+    <p class="stat-value" id="selected-aht">—</p>
+  </div>
+
+  <div class="stat-card">
+    <p class="stat-label">Attendance</p>
+    <p class="stat-value" id="selected-attendance">—</p>
+  </div>
+
+</div>
+            				
+        			<!-- ✅ HISTORY INSIDE SAME GROUP -->
+        			<div id="agent-history" class="mt-40 hidden">
+            				<h4>Performance History</h4>
+
+            				<div class="stat-card">
+                				<table class="history-table">
+                    					<thead>
+                        					<tr>
+                            						<th>Date</th>
+                            						<th>QA</th>
+                            						<th>AHT</th>
+                            						<th>Attendance</th>
+                        					</tr>
+                    					</thead>
+                    					<tbody id="history-body"></tbody>
+                				</table>
+            				</div>
+        			</div>
+    			</div>
+
+
+
+			
+<div class="tl-input-panel mt-40 hidden">
+
+  <hr class="mt-20">
+
+
+
+  <h3>Update Employee Stats</h3>
+
+  <!-- ✅ KEEP DROPDOWN OUTSIDE WRAPPER -->
+  <div class="form-group">
+    <label for="agent-select">Select Agent</label>
+    <select id="agent-select">
+      <option value="">-- Select an Agent --</option>
+    </select>
+    <small class="field-error"></small>
+  </div>
+
+  <!-- ✅ EVERYTHING ELSE GOES INSIDE HERE -->
+
+
+  <div id="tl-input-fields" class="hidden">
+
+<h3 class="mt-20">QPB History</h3>
+<table class="history-table" id="incentive-history-table">
+  <thead>
+<tr>
+  <th>Month</th>
+  <th>Grade</th>
+  <th>Amount</th>
+  <th>Action</th>
+</tr>
+
+  </thead>
+
+  <tbody id="incentive-history-body">
+  </tbody>
+</table>
+<div id="manual-qpb-panel">
+<h3>QPB Incentive</h3>
+
+
+
+<div class="chart-tabs">
+
+  <button
+    class="tab-btn active"
+    id="manual-qpb-tab"
+  >
+    Manual Entry
+  </button>
+
+  <button
+    class="tab-btn"
+    id="bulk-qpb-tab"
+  >
+    Free Flow
+  </button>
+
+</div>
+
+
+<div class="form-group">
+  <label for="incentive-month">
+    Month
+  </label>
+
+  <select id="incentive-month">
+    <option value="">Select Month</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="incentive-amount">
+    Incentive Amount (₱)
+  </label>
+
+  <input
+    type="number"
+    id="incentive-amount"
+    min="0"
+    placeholder="5000"
+  />
+</div>
+
+<select id="qpb-grade">
+  <option value="">Select Grade</option>
+  <option value="EA">EA</option>
+  <option value="AMORE">AMORE</option>
+  <option value="FA">FA</option>
+  <option value="AMOST">AMOST</option>
+</select>
+
+<div class="form-group">
+
+  <label for="additional-incentive">
+    Additional Incentive (₱)
+  </label>
+
+  <small>
+    Kudos, Spot Award, Recognition, etc.
+  </small>
+
+  <input
+    type="number"
+    id="additional-incentive"
+    min="0"
+    value="0"
+    placeholder="Enter additional incentive amount"
+  />
+
+</div>
+
+
+
+<center>
+  <div class="modal-actions">
+  <button
+    type="button"
+    class="nav-btn btn-primary"
+    id="save-incentive-btn"
+  >
+    Save Incentive
+  </button>
+
+  <button
+    type="button"
+    class="nav-btn btn-danger"
+    id="delete-incentive-btn"
+  >
+    Delete
+  </button>
+</div>
+</center>
+</div>
+
+
+<div
+  id="bulk-qpb-panel"
+  class="hidden"
+>
+
+ <textarea
+  id="bulk-qpb-input"
+  rows="8"
+  placeholder="June 5000 EA
+July 4500 AMORE
+August 3000 FA">
+</textarea>
+
+  <button
+    id="import-qpb-btn"
+    type="button"
+    class="nav-btn btn-primary"
+  >
+    Import
+  </button>
+
+</div>
+
+<hr class="mt-20">
+
+<h3>Team Lead Notes</h3>
+
+<div class="form-group">
+  <textarea
+    id="employee-note"
+    rows="5"
+    placeholder="Enter coaching notes, QPB summary, reminders, commendations..."
+  ></textarea>
+</div>
+
+<center>
+  <button
+    type="button"
+    class="nav-btn btn-primary"
+    id="save-note-btn"
+  >
+    Save Note
+  </button>
+</center>
+
+
+
+
+    <div class="form-group">
+      <label for="input-date">Date</label>
+      <input type="date" id="input-date" />
+    </div>
+
+    <div class="form-group hidden" id="final-qa-group">
+      <label for="input-qa">Final QA (%)</label>
+      <input type="number" id="input-qa" min="0" max="100" step="0.01" />
+    </div>
+
+    <div class="form-group hidden">
+      <label for="input-qa-disability">Disability QA (%)</label>
+      <input type="number" id="input-qa-disability" min="0" max="100" step="0.01" />
+    </div>
+
+    <div class="form-group">
+      <label for="input-qa-disability-count">Disability Audit Count</label>
+      <input type="number" id="input-qa-disability-count" min="0" />
+    </div>
+
+    <div class="form-group hidden" id="commercial-count-group">
+      <label for="input-qa-commercial-count">Commercial Audit Count</label>
+      <input type="number" id="input-qa-commercial-count" min="0" />
+    </div>
+
+    <div class="form-group">
+      <label for="input-aht">AHT (seconds)</label>
+      <input type="number" id="input-aht" />
+    </div>
+
+    <div class="form-group">
+      <label for="input-attendance">Attendance (%)</label>
+      <input type="number" id="input-attendance" min="0" max="100" />
+    </div>
+
+    <center>
+      <button 
+        type="button"
+        class="nav-btn btn-primary"
+        id="save-stats-btn"
+        disabled
+      >
+        Save Stats
+      </button>
+    </center>
+
+    <div id="save-preview" class="mt-20 text-muted"></div>
+
+
+
+  </div> <!-- ✅ END WRAPPER -->
+
+
+
+</div>
+
+
+							
+												
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+</div>
+
+<div id="leave-modal" class="hidden modal">
+
+  <div class="modal-content">
+
+    <h4>🌴 Vacation Leave</h4>
+
+    <!-- ✅ show selected date -->
+    <p id="selected-date-label" class="text-center fw-bold"></p>
+
+    <select id="leave-employee"></select>
+
+    <select id="leave-status">
+      <option value="Pending">Pending</option>
+      <option value="Approved">Approved</option>
+      <option value="Denied">Denied</option>
+    </select>
+
+    <div class="modal-actions">
+      <button id="save-leave" class="nav-btn btn-primary">Save</button>
+      <button id="close-leave" class="nav-btn">Cancel</button>
+    </div>
+
+  </div>
+
+</div>
+
+<div id="leave-request-modal" class="hidden modal">
+
+  <div class="modal-content">
+
+    <h3>🩷 Vacation Day Request</h3>
+
+<div class="leave-month-header">
+
+<span id="leave-month-title"></span>
+
+</div>
+
+    <p id="request-selected-date"></p>
+
+    <div class="leave-request-group">
+
+      <label>💖 Vacation Day 1</label>
+      <input
+        type="date"
+        id="leave-date-1"
+      >
+
+    </div>
+
+    <div class="leave-request-group">
+
+      <label>💖 Vacation Day 2</label>
+      <input
+        type="date"
+        id="leave-date-2"
+      >
+
+    </div>
+
+    <div class="leave-request-group">
+
+      <label>💖 Vacation Day 3</label>
+      <input
+        type="date"
+        id="leave-date-3"
+      >
+
+    </div>
+
+<button
+  id="add-more-days"
+  type="button"
+  class="nav-btn"
+>
+  ➕ Add More Days
+</button>
+
+<div
+  id="additional-days-section"
+  class="hidden"
+>
+
+  <div class="leave-request-group">
+
+    <label>💖 Vacation Day 4</label>
+
+    <input
+      type="date"
+      id="leave-date-4"
+    >
+
+  </div>
+
+  <div class="leave-request-group">
+
+    <label>💖 Vacation Day 5</label>
+
+    <input
+      type="date"
+      id="leave-date-5"
+    >
+
+  </div>
+
+<label>
+    💌 Reason for Additional Vacation Days
+</label>
+
+<textarea
+    id="extra-days-reason"
+    rows="4"
+    placeholder="Tell us a little more about your vacation request 💖"
+></textarea>
+
+</div>
+
+    <div class="modal-actions">
+
+      <button
+        id="close-request-modal"
+        class="nav-btn"
+      >
+        Cancel
+      </button>
+
+      <button
+        id="submit-request"
+        class="nav-btn btn-primary"
+      >
+        Submit
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+    </div>
+
+<div id="confirm-modal" class="confirm-modal hidden">
+
+  <div class="confirm-card">
+
+    <div class="confirm-icon">
+      🩷
+    </div>
+
+    <h3>Delete Comment?</h3>
+
+    <p>
+      Are you sure you want to remove this comment?
+    </p>
+
+    <div class="confirm-actions">
+
+      <button
+        id="confirm-yes"
+        class="nav-btn btn-danger"
+      >
+        Delete 🗑️
+      </button>
+
+      <button
+        id="confirm-no"
+        class="nav-btn btn-primary"
+      >
+        Keep 💖
+      </button>
+</div>
+</div>
+</div>
+
+<div
+    id="gallery-post-modal"
+    class="gallery-modal hidden"
+>
+
+    <div class="gallery-post-layout">
+
+        <div class="gallery-post-image">
+
+          <button
+             id="post-prev-image"
+             class="gallery-post-nav"
+          >
+                  ‹
+          </button>
+
+          <img
+              id="post-modal-image"
+          >
+
+          <div id="post-image-counter"
+           class="post-image-counter">
+               1 / 1
+          </div>
+
+          <div
+           id="post-image-thumbnails"
+           class="post-image-thumbnails">
+          </div>
+
+          <button
+              id="post-next-image"
+              class="gallery-post-nav"
+          >
+                  ›
+          </button>
+
+        </div>
+
+        <div class="gallery-post-comments">
+
+            <button
+                id="gallery-post-close"
+                class="gallery-post-close"
+            >
+                    ✕
+            </button>
+
+            <h3>Comments 💬</h3>
+
+            <div
+                id="post-modal-comments"
+            ></div>
+
+            <div
+                class="post-comment-input-row"
+            >
+
+                <input
+                    id="post-modal-input"
+                    placeholder="Write a comment..."
+                >
+
+                <button
+                    id="post-modal-send"
+                >
+                    Post
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div
+    id="whats-new-modal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <h2>
+            🆕 What's New
+        </h2>
+
+<div class="whats-new-layout">
+
+    <div
+        id="whats-new-sidebar"
+        class="whats-new-sidebar"
+    ></div>
+
+    <div
+        id="whats-new-container"
+        class="whats-new-content"
+    ></div>
+
+</div>
+
+
+        <button
+            id="close-whats-new"
+            class="nav-btn btn-primary"
+        >
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+<div
+    id="vacation-alert-modal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <h3>
+            🌴 Vacation Requests Pending
+        </h3>
+
+        <p>
+            Employees have vacation requests waiting for review.
+        </p>
+
+        <div
+            id="vacation-alert-list"
+            class="mt-20"
+        ></div>
+
+        <button
+            id="close-vacation-alert"
+            class="nav-btn btn-primary"
+        >
+            Review Later
+        </button>
+
+    </div>
+
+</div>
+
+<div
+    id="leave-email-modal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <h3>💖 Leave Request Email Template</h3>
+
+
+
+<div class="leave-email-banner">
+
+    <div class="leave-email-icon">
+        💌
+    </div>
+
+    <h3>
+        Leave Request Submitted
+    </h3>
+
+    <p>
+        Your vacation leave request has been
+        saved successfully.
+    </p>
+
+    <div class="leave-email-reminder">
+
+    🌸 Almost done! Please copy the email
+    template below and send it to your
+    Team Lead for approval.
+
+</div>
+
+<div class="leave-email-subject-card">
+
+    <div class="leave-email-subject-label">
+        📌 Required Outlook Subject
+    </div>
+
+    <div class="leave-email-subject">
+        TEAM RIA - VL REQUEST
+    </div>
+
+</div>
+
+        <textarea
+            id="leave-email-preview"
+            rows="18"
+            readonly
+            style="
+                width:100%;
+                resize:none;
+            "
+        ></textarea>
+
+        <div class="modal-actions">
+
+
+
+    <button
+        id="copy-leave-subject"
+        class="nav-btn"
+    >
+        Copy Subject 📌
+    </button>
+
+    <button
+        id="copy-leave-email"
+        class="nav-btn btn-primary"
+    >
+        Copy Email 📋
+    </button>
+
+    <button
+        id="close-email-preview"
+        class="nav-btn"
+    >
+        Close
+    </button>
+
+</div>
+
+    </div> <!-- leave-email-modal .modal-content -->
+
+</div> <!-- leave-email-modal -->
+
+
+<div
+    id="email-copied-modal"
+    class="modal hidden"
+>
+
+    <div class="modal-content email-copied-card">
+
+        <div class="email-copied-stars">
+            ✨ 💖 ✨
+        </div>
+
+        <div class="email-copied-icon">
+            📋
+        </div>
+
+        <h3>
+            Email Copied!
+        </h3>
+
+        <p>
+            Your leave request email has been copied successfully.
+        </p>
+
+<div class="email-copied-message">
+
+    🌸 You're all set!
+
+    <br><br>
+
+    Don't forget to use:
+
+    <br><br>
+
+    <strong>
+        TEAM RIA - VL REQUEST
+    </strong>
+
+    <br><br>
+
+    as your Outlook subject line before sending the email.
+
+</div>
+
+        <button
+            id="close-email-copied"
+            class="nav-btn btn-primary"
+        >
+            Yay! 💖
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+	</main>
+	<footer>
+		&copy; 2026 Piamonte
+	</footer>
+	</div>
+		
+
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+		
+
+<!-- ✅ Firebase (COMPAT) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+<!-- ✅ YOUR CONFIG -->
+<script src="js/core/firebase.js"></script>
+
+<!-- ✅ YOUR APP -->
+<script src="js/core/data.js"></script>
+<script src="js/core/auth.js"></script>
+<script src="js/features/incentives.js"></script>
+<script src="js/components/theme.js"></script>
+<script src="js/components/header.js"></script>
+<script src="js/pages/profile.js"></script>
+<script src="js/features/leave.js"></script>
+<script src="js/features/ranking.js"></script>
+<script src="js/features/vacationRequests.js"></script>
+<script src="js/features/gallery.js"></script>
+<script src="js/features/whatsNew.js"></script>
+<script src="js/roles/employee.js"></script>
+<script src="js/roles/tl.js"></script>
+<script src="js/pages/ui-charts.js"></script>
+<script src="js/pages/ui.js"></script>
+<script src="js/core/app.js"></script>
+<script src="js/roles/admin.js"></script>
+
+
+		
+
+	</body>
+</html>
+

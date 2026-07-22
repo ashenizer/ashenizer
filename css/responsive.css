@@ -1,0 +1,191 @@
+/* ======================================
+   LARGE LAPTOPS
+====================================== */
+
+@media (max-width: 1400px) {
+
+  .globe {
+    width: 180px;
+    height: 180px;
+  }
+
+  .orbit-ring {
+    width: 340px;
+    height: 340px;
+  }
+
+  .panel {
+    width: 450px;
+    height: 480px;
+  }
+
+  .core-status {
+    top: 220px;
+  }
+
+}
+
+
+
+/* ======================================
+   SMALL LAPTOPS
+====================================== */
+
+@media (max-width: 1200px) {
+
+  .globe {
+    width: 160px;
+    height: 160px;
+  }
+
+  .orbit-ring {
+    width: 300px;
+    height: 300px;
+  }
+
+  .panel {
+    width: 380px;
+    height: 450px;
+  }
+
+  .panel-container {
+    right: 20px;
+  }
+
+  .core-status {
+    top: 200px;
+    width: 200px;
+  }
+
+}
+
+
+
+/* ======================================
+   TABLETS (LANDSCAPE)
+====================================== */
+
+@media (max-width: 992px) {
+
+  .globe-container {
+    transform:
+      translate(-50%, -50%)
+      scale(0.8);
+  }
+
+  .panel {
+    width: 320px;
+    height: 420px;
+  }
+
+  .panel-container {
+    right: 10px;
+  }
+
+}
+
+
+
+/* ======================================
+   TABLETS (PORTRAIT)
+====================================== */
+
+@media (max-width: 768px) {
+
+  .globe-container {
+    transform:
+      translate(-50%, -50%)
+      scale(0.65);
+  }
+
+  .panel {
+    width: 280px;
+    height: 400px;
+
+    padding: 15px;
+  }
+
+  .panel-container {
+    right: 5px;
+  }
+
+  .request-card {
+    padding: 12px;
+  }
+
+}
+
+
+
+/* ======================================
+   MOBILE
+====================================== */
+
+@media (max-width: 576px) {
+
+  .god-header h1 {
+    font-size: 18px;
+  }
+
+  #god-logout {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+
+  .globe-container {
+    transform:
+      translate(-50%, -50%)
+      scale(0.5);
+  }
+
+  .panel {
+
+    width: 220px;
+    height: 320px;
+
+    padding: 12px;
+  }
+
+  .panel h3 {
+    font-size: 12px;
+  }
+
+  .core-status {
+    width: 180px;
+  }
+
+}
+
+
+
+/* ======================================
+   VERY SMALL PHONES
+====================================== */
+
+@media (max-width: 400px) {
+
+  .globe-container {
+    transform:
+      translate(-50%, -50%)
+      scale(0.42);
+  }
+
+  .panel {
+
+    width: 180px;
+    height: 260px;
+
+    padding: 10px;
+  }
+
+  .request-card {
+    padding: 10px;
+  }
+
+  .approve-btn {
+    font-size: 10px;
+    padding: 8px;
+  }
+
+}
+
