@@ -357,6 +357,8 @@ const att = document.getElementById("input-attendance").value;
 
   const date = document.getElementById("input-date").value;
 
+console.log("DATE PICKER:", date);
+
 if (qa && !isValidPercent(qa)) {
   alert("QA must be a valid number");
   return;
@@ -391,14 +393,21 @@ if (!date) {
 // ✅ keep this for carry-over
 const prevEntry = { ...(App.data.statsStore[email]?.current || {}) };
 
+console.log("PREV ENTRY:", prevEntry);
+
 delete prevEntry.id;
+delete prevEntry.date;
+
+
 
 
 // ✅ Start with previous values
 let entry = {
-  date,
-  ...prevEntry
+  ...prevEntry,
+  date
 };
+
+console.log("ENTRY BEFORE SAVE:", entry);
 
 // ✅ REQUIRE FINAL QA
 
