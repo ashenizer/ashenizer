@@ -689,6 +689,32 @@
 
   <h3>Update Employee Stats</h3>
 
+<hr class="mt-20">
+
+<h3>📸 Import Performance Screenshot</h3>
+
+<div class="form-group">
+  <label for="ocr-import-date">
+    Import Date
+  </label>
+
+  <input
+    type="date"
+    id="ocr-import-date"
+  />
+</div>
+
+<input
+  type="file"
+  id="ocr-upload"
+  accept="image/*"
+/>
+
+<div
+  id="ocr-preview"
+  class="mt-20"
+></div>
+
   <!-- ✅ KEEP DROPDOWN OUTSIDE WRAPPER -->
   <div class="form-group">
     <label for="agent-select">Select Agent</label>
@@ -1433,6 +1459,9 @@ August 3000 FA">
 <script src="js/features/vacationRequests.js"></script>
 <script src="js/features/gallery.js"></script>
 <script src="js/features/whatsNew.js"></script>
+<script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="js/features/statsOCR.js"></script>
+<script src="js/features/statsImport.js"></script>
 <script src="js/roles/employee.js"></script>
 <script src="js/roles/tl.js"></script>
 <script src="js/pages/ui-charts.js"></script>
