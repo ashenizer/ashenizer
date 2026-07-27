@@ -41,10 +41,22 @@ App.statsOCR.normalizeName = function(name) {
       first + " " + last;
   }
 
-  return name
-    .toLowerCase()
-    .replace(/\s+/g, " ")
-    .trim();
+return name
+  .toLowerCase()
+
+  // remove apostrophes/quotes
+  .replace(/[''`]/g, "")
+
+  // remove commas
+  .replace(/,/g, " ")
+
+  // remove periods
+  .replace(/\./g, " ")
+
+  // collapse spaces
+  .replace(/\s+/g, " ")
+
+  .trim();
 };
 
 App.statsOCR.readImage = async function(event) {
@@ -82,14 +94,17 @@ App.statsOCR.extractAHT = function(text) {
 
   const rows = [];
 
-  const lines = text.split("\n");
+  const lines =
+    text.split("\n");
 
   lines.forEach(line => {
 
     line = line.trim();
 
     const match =
-      line.match(/^(.+?)\s+(\d+)$/);
+      line.match(
+        /^(.+?)\s+(\d+)\s+(\d+)/
+      );
 
     if (!match) return;
 
@@ -97,7 +112,7 @@ App.statsOCR.extractAHT = function(text) {
       match[1].trim();
 
     const aht =
-      parseInt(match[2], 10);
+      parseInt(match[3], 10);
 
     rows.push({
       name,
@@ -107,6 +122,7 @@ App.statsOCR.extractAHT = function(text) {
   });
 
   return rows;
+
 };
 
 App.statsOCR.matchEmployees = function(rows) {
@@ -117,11 +133,42 @@ App.statsOCR.matchEmployees = function(rows) {
       .find(([email, user]) => {
 
 
-return (
-  App.statsOCR.normalizeName(user.name) ===
-  App.statsOCR.normalizeName(row.name)
-);
+const dbName =
+  App.statsOCR.normalizeName(
+    user.name
+  );
 
+const ocrName =
+  App.statsOCR.normalizeName(
+    row.name
+  );
+
+if (dbName === ocrName) {
+  return true;
+}
+
+const compactDb =
+  dbName.replace(/\s+/g, "");
+
+const compactOcr =
+  ocrName.replace(/\s+/g, "");
+
+if (compactDb === compactOcr) {
+  return true;
+}
+
+const dbTokens =
+  dbName.split(" ");
+
+const ocrTokens =
+  ocrName.split(" ");
+
+const matchingTokens =
+  ocrTokens.filter(token =>
+    dbTokens.includes(token)
+  );
+
+return matchingTokens.length >= 2;
       });
 
     return {
