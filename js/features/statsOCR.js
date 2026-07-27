@@ -101,18 +101,44 @@ App.statsOCR.extractAHT = function(text) {
 
     line = line.trim();
 
-    const match =
-      line.match(
-        /^(.+?)\s+(\d+)\s+(\d+)/
-      );
+let match =
+  line.match(
+    /^(.+?)\s+(\d+)\s+(\d+)/
+  );
 
-    if (!match) return;
+let aht;
 
-    const name =
-      match[1].trim();
+if (match) {
 
-    const aht =
-      parseInt(match[3], 10);
+  // Format:
+  // Name Handled AHT
+
+  aht = parseInt(
+    match[3],
+    10
+  );
+
+} else {
+
+  match =
+    line.match(
+      /^(.+?)\s+(\d+)$/
+    );
+
+  if (!match) return;
+
+  // Format:
+  // Name AHT
+
+  aht = parseInt(
+    match[2],
+    10
+  );
+
+}
+
+const name =
+  match[1].trim();
 
     rows.push({
       name,
