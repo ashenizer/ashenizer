@@ -4,19 +4,6 @@ App.statsOCR = {};
 
 App.statsOCR.lastImport = [];
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  const upload =
-    document.getElementById("ocr-upload");
-
-  if (!upload) return;
-
-  upload.addEventListener(
-    "change",
-    App.statsOCR.readImage
-  );
-
-});
 
 App.statsOCR.normalizeName = function(name) {
 
@@ -59,34 +46,44 @@ return name
   .trim();
 };
 
-App.statsOCR.readImage = async function(event) {
+App.statsOCR.processFile =
+  async function(file) {
 
-  const file =
-    event.target.files?.[0];
+    const result =
+      await Tesseract.recognize(
+        file
+      );
 
-  if (!file) return;
+    const rows =
+      App.statsOCR.extractAHT(
+        result.data.text
+      );
 
+    const matchedRows =
+      App.statsOCR.matchEmployees(
+        rows
+      );
 
+    App.statsOCR.lastImport =
+      matchedRows;
 
-  const result =
-    await Tesseract.recognize(file);
+    App.statsOCR.showReviewModal(
+      matchedRows
+    );
 
-const rows =
-  App.statsOCR.extractAHT(
-    result.data.text
-  );
+};
 
-const matchedRows =
-  App.statsOCR.matchEmployees(rows);
+App.statsOCR.readImage =
+  async function(event) {
 
+    const file =
+      event.target.files?.[0];
 
-App.statsOCR.lastImport =
-  matchedRows;
+    if (!file) return;
 
-
-App.statsOCR.showReviewModal(
-  matchedRows
-);
+    App.statsOCR.processFile(
+      file
+    );
 
 };
 
@@ -287,6 +284,16 @@ document.addEventListener(
   "DOMContentLoaded",
   () => {
 
+    const upload =
+      document.getElementById(
+        "ocr-upload"
+      );
+
+    const dropzone =
+      document.getElementById(
+        "ocr-dropzone"
+      );
+
     const cancelBtn =
       document.getElementById(
         "ocr-cancel-btn"
@@ -301,6 +308,66 @@ document.addEventListener(
       document.getElementById(
         "ocr-review-modal"
       );
+
+    if (!upload) return;
+
+    upload.addEventListener(
+      "change",
+      App.statsOCR.readImage
+    );
+
+    dropzone?.addEventListener(
+      "click",
+      () => {
+        upload.click();
+      }
+    );
+
+    dropzone?.addEventListener(
+      "dragover",
+      event => {
+
+        event.preventDefault();
+
+        dropzone.classList.add(
+          "drag-active"
+        );
+
+      }
+    );
+
+    dropzone?.addEventListener(
+      "dragleave",
+      () => {
+
+        dropzone.classList.remove(
+          "drag-active"
+        );
+
+      }
+    );
+
+    dropzone?.addEventListener(
+      "drop",
+      event => {
+
+        event.preventDefault();
+
+        dropzone.classList.remove(
+          "drag-active"
+        );
+
+        const file =
+          event.dataTransfer.files?.[0];
+
+        if (!file) return;
+
+        App.statsOCR.processFile(
+          file
+        );
+
+      }
+    );
 
     cancelBtn?.addEventListener(
       "click",
@@ -318,5 +385,41 @@ document.addEventListener(
       App.statsImport.importAHT
     );
 
+document.addEventListener(
+  "paste",
+  event => {
+
+    const items =
+      event.clipboardData?.items;
+
+    if (!items) return;
+
+    for (const item of items) {
+
+      if (
+        item.type.startsWith(
+          "image/"
+        )
+      ) {
+
+        const file =
+          item.getAsFile();
+
+        if (!file) continue;
+
+        App.statsOCR.processFile(
+          file
+        );
+
+        break;
+      }
+
+    }
+
   }
+);
+
+  }
+
+
 );
