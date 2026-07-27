@@ -1,0 +1,21 @@
+.ocr-modal-content {
+    width: 90%;
+    max-width: 900px;
+}
+
+.ocr-review-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ocr-review-table th,
+.ocr-review-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.ocr-review-body {
+    max-height: 500px;
+    overflow-y: auto;
+}

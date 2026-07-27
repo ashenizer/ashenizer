@@ -5,10 +5,10 @@ App.statsImport = {};
 
 App.statsImport.importAHT = async function () {
 
-  const date =
-    document.getElementById(
-      "ocr-import-date"
-    )?.value;
+const date =
+  document.getElementById(
+    "ocr-modal-date"
+  )?.value;
 
   if (!date) {
     alert(
@@ -87,6 +87,14 @@ App.statsImport.importAHT = async function () {
     alert(
       `✅ Imported ${imported} AHT records`
     );
+
+document
+  .getElementById(
+    "ocr-review-modal"
+  )
+  ?.classList.add(
+    "hidden"
+  );
 
   } catch (error) {
 

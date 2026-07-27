@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="css/vacationRequests.css">
 		<link rel="stylesheet" href="css/whatsNew.css">
 		<link rel="stylesheet" href="css/forgot.css">
+		<link rel="stylesheet" href="css/ocr.css">
 		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Nunito:wght@300;400;700&family=Pacifico&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 	</head>
@@ -693,27 +694,13 @@
 
 <h3>📸 Import Performance Screenshot</h3>
 
-<div class="form-group">
-  <label for="ocr-import-date">
-    Import Date
-  </label>
-
-  <input
-    type="date"
-    id="ocr-import-date"
-  />
-</div>
-
 <input
   type="file"
   id="ocr-upload"
   accept="image/*"
 />
 
-<div
-  id="ocr-preview"
-  class="mt-20"
-></div>
+
 
   <!-- ✅ KEEP DROPDOWN OUTSIDE WRAPPER -->
   <div class="form-group">
@@ -1424,7 +1411,59 @@ August 3000 FA">
 
 </div>
 
+<div
+    id="ocr-review-modal"
+    class="modal hidden"
+>
 
+    <div class="modal-content ocr-modal-content">
+
+        <h3>
+            📸 OCR Import Review
+        </h3>
+
+<p>
+    Review scanned employees before importing.
+</p>
+
+<div class="form-group">
+
+    <label for="ocr-modal-date">
+        Import Date
+    </label>
+
+    <input
+        type="date"
+        id="ocr-modal-date"
+    />
+
+</div>
+
+
+        <div id="ocr-review-body">
+        </div>
+
+        <div class="modal-actions">
+
+            <button
+                id="ocr-cancel-btn"
+                class="nav-btn"
+            >
+                Cancel
+            </button>
+
+            <button
+                id="ocr-confirm-btn"
+                class="nav-btn btn-primary"
+            >
+                🚀 Import
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 	</main>

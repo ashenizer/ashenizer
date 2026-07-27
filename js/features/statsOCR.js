@@ -54,11 +54,7 @@ App.statsOCR.readImage = async function(event) {
 
   if (!file) return;
 
-  const preview =
-    document.getElementById("ocr-preview");
 
-  preview.innerHTML =
-    "🔍 Reading screenshot...";
 
   const result =
     await Tesseract.recognize(file);
@@ -76,9 +72,10 @@ App.statsOCR.lastImport =
   matchedRows;
 
 
-App.statsOCR.renderPreview(
+App.statsOCR.showReviewModal(
   matchedRows
 );
+
 };
 
 App.statsOCR.extractAHT = function(text) {
@@ -137,62 +134,116 @@ return (
 
 };
 
-App.statsOCR.renderPreview = function(rows) {
 
-  const preview =
-    document.getElementById("ocr-preview");
+App.statsOCR.showReviewModal = function(rows) {
+
+  const modal =
+    document.getElementById(
+      "ocr-review-modal"
+    );
+
+  const body =
+    document.getElementById(
+      "ocr-review-body"
+    );
 
   const html = rows.map(row => `
+
     <tr>
-      <td>${row.found ? "✅" : "❌"}</td>
+
+      <td>
+        ${row.found ? "✅" : "❌"}
+      </td>
+
       <td>${row.name}</td>
+
       <td>${row.AHT}</td>
-      <td>${row.email || "Not Found"}</td>
+
+      <td>
+        ${row.email || "Not Found"}
+      </td>
+
     </tr>
+
   `).join("");
 
-  preview.innerHTML = `
-    <h4>Matched Employees</h4>
+  body.innerHTML = `
 
-    <table class="history-table">
-      <thead>
-        <tr>
-          <th>Status</th>
-          <th>Name</th>
-          <th>AHT</th>
-          <th>Email</th>
-        </tr>
-      </thead>
+    <div class="ocr-review-body">
 
-      <tbody>
-        ${html}
-      </tbody>
-    </table>
+      <table class="ocr-review-table">
 
-    <div class="mt-20">
-      <button
-        id="import-aht-btn"
-        class="nav-btn btn-primary"
-        type="button"
-      >
-        🚀 Import All AHT
-      </button>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Name</th>
+            <th>AHT</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${html}
+        </tbody>
+
+      </table>
+
     </div>
+
   `;
 
-  // ATTACH CLICK EVENT HERE
-  const importBtn =
-    document.getElementById("import-aht-btn");
+const dateInput =
+  document.getElementById(
+    "ocr-modal-date"
+  );
 
-  if (importBtn) {
+if (dateInput && !dateInput.value) {
 
-importBtn.addEventListener(
-  "click",
-  App.statsImport.importAHT
-);
+  dateInput.value =
+    new Date()
+      .toISOString()
+      .split("T")[0];
+
+}
 
 
+  modal.classList.remove("hidden");
+};
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    const cancelBtn =
+      document.getElementById(
+        "ocr-cancel-btn"
+      );
+
+    const importBtn =
+      document.getElementById(
+        "ocr-confirm-btn"
+      );
+
+    const modal =
+      document.getElementById(
+        "ocr-review-modal"
+      );
+
+    cancelBtn?.addEventListener(
+      "click",
+      () => {
+
+        modal.classList.add(
+          "hidden"
+        );
+
+      }
+    );
+
+    importBtn?.addEventListener(
+      "click",
+      App.statsImport.importAHT
+    );
 
   }
-
-};
+);
