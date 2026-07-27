@@ -7,6 +7,41 @@ App.whatsNew.version = "2.1.0";
 App.whatsNew.updates = [
 
 {
+    version: "2.3.0",
+
+    released: "July 2026",
+
+    title: "📸 OCR Performance Import",
+
+    summary:
+        "Team Leads can now import employee AHT data directly from performance screenshots using OCR with a built-in review and validation workflow.",
+
+    items: [
+
+        "Added OCR screenshot reader powered by Tesseract.",
+
+        "Added automatic employee name matching against registered users.",
+
+        "Added OCR Import Review modal.",
+
+        "Added import validation before saving data.",
+
+        "Added employee match verification with success and failure indicators.",
+
+        "Added bulk AHT import from screenshots.",
+
+        "Added import date selection directly inside the OCR review modal.",
+
+        "Added automatic import review workflow before database updates.",
+
+        "Improved Team Lead productivity when entering performance data.",
+
+        "Reduced manual AHT entry requirements."
+
+    ]
+},
+
+{
     version: "2.2.1",
 
     released: "July 2026",
