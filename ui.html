@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="css/whatsNew.css">
 		<link rel="stylesheet" href="css/forgot.css">
 		<link rel="stylesheet" href="css/ocr.css">
+		<link rel="stylesheet" href="css/performanceModal.css">
 		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Nunito:wght@300;400;700&family=Pacifico&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 	</head>
@@ -591,106 +592,13 @@
 
 
 </div>			
-					
-<!-- Team Lead View -->
-				<div id="lead-view" class="hidden">
-
-
-    					<h3>Team Performance</h3>
-
-    					<!-- ✅ TEAM STATS -->
-   					<div class="stat-card" id="team-qa-card">
-        <div class="stat-label">TEAM QA</div>
-        <div class="stat-value team-qa-value" id="team-qa-value">--</div>
-    </div>
-
-    <div class="stat-card" id="team-aht-card">
-        <div class="stat-label">TEAM AHT</div>
-        <div class="stat-value team-aht-value" id="team-aht-value">--</div>
-    </div>
-
-    <div class="stat-card" id="team-attendance-card">
-        <div class="stat-label">TEAM ATTENDANCE</div>
-        <div class="stat-value team-attendance-value" id="team-attendance-value">--</div>
-    </div>
-				
-				
-
-					
-    				</div>
-
-
 
    				 <!-- ✅ SELECTED AGENT SECTION (NOW UNDER TEAM STATS) -->
-    				 
-				<div id="selected-agent-stats" class="hidden mt-40">
-  					<h3 id="selected-agent-title">Selected Agent Performance</h3>
-
-
-        				<div class="stats-grid">
-            					
-
-  <div class="stat-card">
-    <p class="stat-label">QA</p>
-    <p class="stat-value" id="selected-qa">—</p>
-
-    <div id="qa-sub-boxes" class="qa-sub-grid hidden">
-      <div class="sub-box">
-        <p class="sub-label">Disability</p>
-        <p class="sub-value" id="selected-qa-dis">—</p>
-      </div>
-
-      <div class="sub-box">
-        <p class="sub-label">Commercial</p>
-        <p class="sub-value" id="selected-qa-com">—</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="stat-card">
-    <p class="stat-label">AHT</p>
-    <p class="stat-value" id="selected-aht">—</p>
-  </div>
-
-  <div class="stat-card">
-    <p class="stat-label">Attendance</p>
-    <p class="stat-value" id="selected-attendance">—</p>
-  </div>
-
-</div>
-            				
-        			<!-- ✅ HISTORY INSIDE SAME GROUP -->
-        			<div id="agent-history" class="mt-40 hidden">
-            				<h4>Performance History</h4>
-
-            				<div class="stat-card">
-                				<table class="history-table">
-                    					<thead>
-                        					<tr>
-                            						<th>Date</th>
-                            						<th>QA</th>
-                            						<th>AHT</th>
-                            						<th>Attendance</th>
-                        					</tr>
-                    					</thead>
-                    					<tbody id="history-body"></tbody>
-                				</table>
-            				</div>
-        			</div>
-    			</div>
-
-
 
 			
 <div class="tl-input-panel mt-40 hidden">
 
-  <hr class="mt-20">
 
-
-
-  <h3>Update Employee Stats</h3>
-
-<hr class="mt-20">
 
 <h3>📸 Import Performance Screenshot</h3>
 
@@ -699,23 +607,21 @@
   class="ocr-dropzone"
 >
 
-  📸 Drop Screenshot Here
+  <div class="ocr-icon">
+    📸
+  </div>
 
-  <br><br>
+  <div class="ocr-title">
+    Import Performance Screenshot
+  </div>
 
-  or
+  <div class="ocr-subtitle">
+    Drag & Drop • Click to Browse • Ctrl + V
+  </div>
 
-  <br><br>
-
-  Click to Browse
-
-  <br><br>
-
-  or
-
-  <br><br>
-
-  Press Ctrl + V to Paste
+  <div class="ocr-tip">
+    Supports screenshots directly from Snipping Tool
+  </div>
 
   <input
     type="file"
@@ -726,7 +632,6 @@
 
 </div>
 
-
   <!-- ✅ KEEP DROPDOWN OUTSIDE WRAPPER -->
   <div class="form-group">
     <label for="agent-select">Select Agent</label>
@@ -736,228 +641,9 @@
     <small class="field-error"></small>
   </div>
 
-  <!-- ✅ EVERYTHING ELSE GOES INSIDE HERE -->
-
-
-  <div id="tl-input-fields" class="hidden">
-
-<h3 class="mt-20">QPB History</h3>
-<table class="history-table" id="incentive-history-table">
-  <thead>
-<tr>
-  <th>Month</th>
-  <th>Grade</th>
-  <th>Amount</th>
-  <th>Action</th>
-</tr>
-
-  </thead>
-
-  <tbody id="incentive-history-body">
-  </tbody>
-</table>
-<div id="manual-qpb-panel">
-<h3>QPB Incentive</h3>
-
-
-
-<div class="chart-tabs">
-
-  <button
-    class="tab-btn active"
-    id="manual-qpb-tab"
-  >
-    Manual Entry
-  </button>
-
-  <button
-    class="tab-btn"
-    id="bulk-qpb-tab"
-  >
-    Free Flow
-  </button>
-
 </div>
 
 
-<div class="form-group">
-  <label for="incentive-month">
-    Month
-  </label>
-
-  <select id="incentive-month">
-    <option value="">Select Month</option>
-  </select>
-</div>
-
-<div class="form-group">
-  <label for="incentive-amount">
-    Incentive Amount (₱)
-  </label>
-
-  <input
-    type="number"
-    id="incentive-amount"
-    min="0"
-    placeholder="5000"
-  />
-</div>
-
-<select id="qpb-grade">
-  <option value="">Select Grade</option>
-  <option value="EA">EA</option>
-  <option value="AMORE">AMORE</option>
-  <option value="FA">FA</option>
-  <option value="AMOST">AMOST</option>
-</select>
-
-<div class="form-group">
-
-  <label for="additional-incentive">
-    Additional Incentive (₱)
-  </label>
-
-  <small>
-    Kudos, Spot Award, Recognition, etc.
-  </small>
-
-  <input
-    type="number"
-    id="additional-incentive"
-    min="0"
-    value="0"
-    placeholder="Enter additional incentive amount"
-  />
-
-</div>
-
-
-
-<center>
-  <div class="modal-actions">
-  <button
-    type="button"
-    class="nav-btn btn-primary"
-    id="save-incentive-btn"
-  >
-    Save Incentive
-  </button>
-
-  <button
-    type="button"
-    class="nav-btn btn-danger"
-    id="delete-incentive-btn"
-  >
-    Delete
-  </button>
-</div>
-</center>
-</div>
-
-
-<div
-  id="bulk-qpb-panel"
-  class="hidden"
->
-
- <textarea
-  id="bulk-qpb-input"
-  rows="8"
-  placeholder="June 5000 EA
-July 4500 AMORE
-August 3000 FA">
-</textarea>
-
-  <button
-    id="import-qpb-btn"
-    type="button"
-    class="nav-btn btn-primary"
-  >
-    Import
-  </button>
-
-</div>
-
-<hr class="mt-20">
-
-<h3>Team Lead Notes</h3>
-
-<div class="form-group">
-  <textarea
-    id="employee-note"
-    rows="5"
-    placeholder="Enter coaching notes, QPB summary, reminders, commendations..."
-  ></textarea>
-</div>
-
-<center>
-  <button
-    type="button"
-    class="nav-btn btn-primary"
-    id="save-note-btn"
-  >
-    Save Note
-  </button>
-</center>
-
-
-
-
-    <div class="form-group">
-      <label for="input-date">Date</label>
-      <input type="date" id="input-date" />
-    </div>
-
-    <div class="form-group hidden" id="final-qa-group">
-      <label for="input-qa">Final QA (%)</label>
-      <input type="number" id="input-qa" min="0" max="100" step="0.01" />
-    </div>
-
-    <div class="form-group hidden">
-      <label for="input-qa-disability">Disability QA (%)</label>
-      <input type="number" id="input-qa-disability" min="0" max="100" step="0.01" />
-    </div>
-
-    <div class="form-group">
-      <label for="input-qa-disability-count">Disability Audit Count</label>
-      <input type="number" id="input-qa-disability-count" min="0" />
-    </div>
-
-    <div class="form-group hidden" id="commercial-count-group">
-      <label for="input-qa-commercial-count">Commercial Audit Count</label>
-      <input type="number" id="input-qa-commercial-count" min="0" />
-    </div>
-
-    <div class="form-group">
-      <label for="input-aht">AHT (seconds)</label>
-      <input type="number" id="input-aht" />
-    </div>
-
-    <div class="form-group">
-      <label for="input-attendance">Attendance (%)</label>
-      <input type="number" id="input-attendance" min="0" max="100" />
-    </div>
-
-    <center>
-      <button 
-        type="button"
-        class="nav-btn btn-primary"
-        id="save-stats-btn"
-        disabled
-      >
-        Save Stats
-      </button>
-    </center>
-
-    <div id="save-preview" class="mt-20 text-muted"></div>
-
-
-
-  </div> <!-- ✅ END WRAPPER -->
-
-
-
-</div>
 
 
 							
@@ -1490,6 +1176,306 @@ August 3000 FA">
 
 </div>
 
+<div id="tl-modal" class="modal hidden">
+
+  <div class="modal-content tl-modal-content">
+
+    <div class="tl-modal-header">
+
+      <h2 id="tl-modal-title">
+        Agent
+      </h2>
+
+      <button id="close-tl-modal">
+        ✕
+      </button>
+
+    </div>
+
+<div class="tl-tabs">
+
+  <button
+    class="tl-tab active"
+    data-tab="performance">
+    📊 Performance
+  </button>
+
+  <button
+    class="tl-tab"
+    data-tab="stats">
+    ➕ Add Stats
+  </button>
+
+  <button
+    class="tl-tab"
+    data-tab="incentives">
+    💰 Incentives
+  </button>
+
+  <button
+    class="tl-tab"
+    data-tab="notes">
+    📝 Notes
+  </button>
+
+</div>
+
+    <div class="tl-tab-content">
+
+      <div
+        id="tl-performance-tab">
+
+      </div>
+
+<div
+  id="tl-stats-tab"
+  class="hidden">
+
+  <h3>Update Employee Stats</h3>
+
+  <div class="form-group">
+    <label>Date</label>
+    <input
+      type="date"
+      id="modal-input-date"
+    />
+  </div>
+
+  <div class="form-group">
+    <label>Final QA (%)</label>
+    <input
+      type="number"
+      id="modal-input-qa"
+      min="0"
+      max="100"
+      step="0.01"
+    />
+  </div>
+
+<div class="form-group">
+  <label>Disability Audit Count</label>
+  <input
+    type="number"
+    id="modal-input-qa-disability-count"
+    min="0"
+  />
+</div>
+
+<div
+  class="form-group hidden"
+  id="modal-commercial-count-group"
+>
+  <label>Commercial Audit Count</label>
+  <input
+    type="number"
+    id="modal-input-qa-commercial-count"
+    min="0"
+  />
+</div>
+
+  <div class="form-group">
+    <label>AHT (seconds)</label>
+    <input
+      type="number"
+      id="modal-input-aht"
+    />
+  </div>
+
+  <div class="form-group">
+    <label>Attendance (%)</label>
+    <input
+      type="number"
+      id="modal-input-attendance"
+      min="0"
+      max="100"
+    />
+  </div>
+
+  <center>
+    <button
+      type="button"
+      class="nav-btn btn-primary"
+      id="modal-save-stats-btn">
+      Save Stats
+    </button>
+  </center>
+
+</div>
+
+<div
+  id="tl-incentives-tab"
+  class="hidden">
+
+  <div id="tl-incentive-section">
+
+    <div class="tl-tabs">
+
+      <button
+        id="manual-qpb-tab"
+        class="tl-tab active">
+        Manual Entry
+      </button>
+
+      <button
+        id="bulk-qpb-tab"
+        class="tl-tab">
+        Bulk Import
+      </button>
+
+    </div>
+
+    <div id="manual-qpb-panel">
+
+      <div class="form-group">
+
+        <label>Month</label>
+
+        <select id="incentive-month">
+          <option value="">
+            Select Month
+          </option>
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Amount</label>
+
+        <input
+          type="number"
+          id="incentive-amount"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Additional Incentive</label>
+
+        <input
+          type="number"
+          id="additional-incentive"
+          value="0"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Grade</label>
+
+        <select id="qpb-grade">
+
+          <option value="">
+            Select Grade
+          </option>
+
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+
+        </select>
+
+      </div>
+
+      <div class="modal-actions">
+
+        <button
+          id="save-incentive-btn"
+          class="nav-btn btn-primary">
+
+          Save
+
+        </button>
+
+        <button
+          id="delete-incentive-btn"
+          class="nav-btn">
+
+          Delete
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      id="bulk-qpb-panel"
+      class="hidden">
+
+      <textarea
+        id="bulk-qpb-input"
+        rows="8"
+        placeholder="July 1000 A"
+      ></textarea>
+
+      <button
+        id="import-qpb-btn"
+        class="nav-btn btn-primary">
+
+        Import
+
+      </button>
+
+    </div>
+
+    <table class="history-table mt-20">
+
+      <thead>
+
+        <tr>
+          <th>Month</th>
+          <th>Grade</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+
+      </thead>
+
+      <tbody id="incentive-history-body"></tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+
+    
+
+<div
+  id="tl-notes-tab"
+  class="hidden">
+
+  <h3>📝 Team Lead Notes</h3>
+
+  <div class="form-group">
+    <textarea
+      id="modal-employee-note"
+      rows="8"
+      placeholder="Enter coaching notes, reminders, commendations..."
+    ></textarea>
+  </div>
+
+  <center>
+    <button
+      type="button"
+      class="nav-btn btn-primary"
+      id="modal-save-note-btn">
+      Save Note
+    </button>
+  </center>
+
+</div>
+</div>
+  </div>
+
+</div>
+</div>
+
 
 	</main>
 	<footer>
@@ -1523,6 +1509,7 @@ August 3000 FA">
 <script src="js/features/vacationRequests.js"></script>
 <script src="js/features/gallery.js"></script>
 <script src="js/features/whatsNew.js"></script>
+<script src="js/features/tlModal.js"></script>
 <script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
 <script src="js/features/statsOCR.js"></script>
 <script src="js/features/statsImport.js"></script>

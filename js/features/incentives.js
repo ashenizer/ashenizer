@@ -39,10 +39,8 @@ App.incentives.populateMonths = function () {
 
 App.incentives.importBulk = async function() {
 
-  const email =
-    document.getElementById(
-      "agent-select"
-    ).value;
+const email =
+  App.tlModal.currentAgent;
 
   if (!email) {
     alert("Select employee first");
@@ -172,8 +170,8 @@ alert("✅ Import complete");
 
 App.incentives.save = async function () {
 
-  const email =
-    document.getElementById("agent-select").value;
+const email =
+  App.tlModal.currentAgent;
 
   const month =
     document.getElementById("incentive-month").value;
@@ -384,23 +382,13 @@ document
     App.incentives.delete
   );
 
-document
-  .getElementById("agent-select")
-  ?.addEventListener("change", (e) => {
-
-    const email = e.target.value;
-
-    App.incentives.loadHistory(email);
-
-  });
-
   }
 );
 
 App.incentives.delete = async function () {
 
-  const email =
-    document.getElementById("agent-select").value;
+const email =
+  App.tlModal.currentAgent;
 
   const month =
     document.getElementById("incentive-month").value;

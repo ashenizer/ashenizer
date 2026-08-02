@@ -114,9 +114,21 @@ window.approve = async function(id) {
   await FirebaseService.db
     .collection("passwordRequests")
     .doc(id)
-    .update({ status: "done" });
+    .update({
 
-  alert("✅ Updated");
+      status: "done",
+
+      approved: true,
+
+      acknowledged: false,
+
+      approvedAt:
+        firebase.firestore.FieldValue.serverTimestamp()
+
+    });
+
+  alert("✅ Password Request Approved");
+
   loadRequests();
 };
 

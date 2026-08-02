@@ -22,11 +22,11 @@
 
 .ocr-dropzone {
 
-  border: 2px dashed #bdbdbd;
+  border: 2px dashed #cfcfcf;
 
-  border-radius: 12px;
+  border-radius: 16px;
 
-  padding: 30px;
+  padding: 40px 20px;
 
   margin: 20px 0;
 
@@ -34,19 +34,60 @@
 
   cursor: pointer;
 
-  transition: all 0.2s ease;
+  transition: all .25s ease;
+
+  background: #fafafa;
+
+}
+
+.ocr-dropzone:hover {
+
+  border-color: #ff7db6;
+
+  background: #fff6fb;
 
 }
 
 .ocr-dropzone.drag-active {
 
-  border-color: #ff69b4;
+  border-color: #ff4fa0;
 
-  background: rgba(
-    255,
-    105,
-    180,
-    0.1
-  );
+  background: #ffe6f2;
+
+  transform: scale(1.01);
+
+}
+
+.ocr-icon {
+
+  font-size: 48px;
+
+  margin-bottom: 10px;
+
+}
+
+.ocr-title {
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  margin-bottom: 8px;
+
+}
+
+.ocr-subtitle {
+
+  color: #666;
+
+  margin-bottom: 12px;
+
+}
+
+.ocr-tip {
+
+  font-size: 13px;
+
+  color: #999;
 
 }

@@ -7,6 +7,55 @@ App.whatsNew.version = "2.1.0";
 App.whatsNew.updates = [
 
 {
+    version: "2.4.0",
+
+    released: "August 2026",
+
+    title: "📊 Team Lead Performance Hub",
+
+    summary:
+        "Employee performance management has been consolidated into a dedicated Team Lead modal featuring performance tracking, stat management, incentives, coaching notes, and an enhanced dashboard experience.",
+
+    items: [
+
+        "Added dedicated Team Lead Employee Performance Modal.",
+
+        "Added tabbed employee management interface.",
+
+        "Added Performance tab for viewing employee KPI metrics.",
+
+        "Added centralized Performance History view within employee profiles.",
+
+        "Added Add Stats tab for faster performance entry.",
+
+        "Added Team Lead Notes tab for coaching and feedback tracking.",
+
+        "Added Incentives Management tab directly inside the employee profile.",
+
+        "Added support for manual and bulk incentive management from the modal.",
+
+        "Improved employee performance review workflow.",
+
+        "Improved KPI card layout and readability.",
+
+        "Improved modal navigation and organization.",
+
+        "Improved Light Mode and Dark Mode support across Team Lead tools.",
+
+        "Modernized employee performance dashboard styling.",
+
+        "Enhanced performance history accessibility with integrated records view.",
+
+        "Reduced the need to navigate between multiple dashboard sections.",
+
+        "Prepared infrastructure for future in-modal performance chart integration.",
+
+        "Various UI fixes, layout enhancements, and performance optimizations."
+
+    ]
+},
+
+{
     version: "2.3.0",
 
     released: "July 2026",
