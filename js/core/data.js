@@ -30,18 +30,6 @@ App.data.users = {
 },
 
 
-
-"agent2@company.com": {
-  role: "employee",
-  name: "Ash Piamonte",
-  password: "1234",
-  team: "Team A",
-  qaType: "hybrid"
-},
-
-
-
-
 "lead@company.com": {
   role: "teamlead",
   name: "Team Lead Ria",

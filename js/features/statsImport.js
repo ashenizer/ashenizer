@@ -17,8 +17,8 @@ const date =
     return;
   }
 
-  const rows =
-    App.statsOCR.lastImport || [];
+const rows =
+  App.statsOCR.lastImport?.rows || [];
 
   if (!rows.length) {
     alert(
@@ -50,11 +50,25 @@ const date =
         App.data.statsStore[email]
           ?.current || {};
 
-      const entry = {
-        ...previous,
-        date,
-        AHT: row.AHT
-      };
+const entry = {
+  ...previous,
+  date
+};
+
+if (
+  App.statsOCR.lastImport.type ===
+  "Attendance"
+) {
+
+  entry.Attendance =
+    row.Attendance;
+
+} else {
+
+  entry.AHT =
+    row.AHT;
+
+}
 
       delete entry.id;
 

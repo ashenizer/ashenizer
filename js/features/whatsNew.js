@@ -7,6 +7,51 @@ App.whatsNew.version = "2.1.0";
 App.whatsNew.updates = [
 
 {
+    version: "2.5.0",
+
+    released: "August 2026",
+
+    title: "📸 OCR Attendance Import",
+
+    summary:
+        "Team Leads can now import Attendance reports directly from screenshots with automatic employee matching, OCR correction, attendance validation, and bulk database updates.",
+
+    items: [
+
+        "Added Attendance OCR import support.",
+
+        "Added automatic Attendance report detection.",
+
+        "Added Reliability report recognition workflow.",
+
+        "Added bulk Attendance import from screenshots.",
+
+        "Added automatic Attendance percentage extraction.",
+
+        "Added OCR correction for common name recognition issues.",
+
+        "Added intelligent employee matching for merged and malformed OCR names.",
+
+        "Added support for employee name validation before import.",
+
+        "Added import review screen for Attendance records.",
+
+        "Added automatic exclusion of employees not found in the current roster.",
+
+        "Improved OCR matching accuracy for Attendance reports.",
+
+        "Improved handling of OCR-generated percentage formatting errors.",
+
+        "Improved Team Lead productivity by reducing manual Attendance entry.",
+
+        "Reduced Attendance processing time from manual entry to a single screenshot upload.",
+
+        "Additional OCR stability improvements and matching enhancements."
+
+    ]
+},
+
+{
     version: "2.4.0",
 
     released: "August 2026",
