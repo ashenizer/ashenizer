@@ -7,6 +7,51 @@ App.whatsNew.version = "2.1.0";
 App.whatsNew.updates = [
 
 {
+    version: "2.6.0",
+
+    released: "August 2026",
+
+    title: "🤖 OCR Quality Analytics Upgrade",
+
+    summary:
+        "The OCR engine has been significantly enhanced with Quality Score imports, smarter employee matching, image enhancement, screenshot recognition improvements, and a streamlined review workflow.",
+
+    items: [
+
+        "Added OCR Quality Assurance (QA) screenshot import support.",
+
+        "Added automatic QA report detection.",
+
+        "Added bulk QA score and evaluation count import.",
+
+        "Added automatic extraction of evaluation totals.",
+
+        "Added image enhancement scaling for improved OCR accuracy.",
+
+        "Improved recognition of low-resolution screenshots.",
+
+        "Improved OCR accuracy for top-row employee records.",
+
+        "Improved employee name matching and fuzzy name detection.",
+
+        "Added OCR correction rules for commonly misread employee names.",
+
+        "Improved handling of merged and malformed OCR text.",
+
+        "Improved screenshot processing performance and reliability.",
+
+        "Enhanced OCR review workflow before importing records.",
+
+        "Reduced manual QA entry requirements for Team Leads.",
+
+        "Reduced performance management administrative workload.",
+
+        "Multiple OCR stability improvements and data-quality enhancements."
+
+    ]
+},
+
+{
     version: "2.5.0",
 
     released: "August 2026",
