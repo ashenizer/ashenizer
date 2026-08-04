@@ -63,13 +63,25 @@ if (
   entry.Attendance =
     row.Attendance;
 
-} else {
+}
+else if (
+  App.statsOCR.lastImport.type ===
+  "QA"
+) {
+
+  entry.QA =
+    row.QA;
+
+  entry.Evaluations =
+    row.Evaluations;
+
+}
+else {
 
   entry.AHT =
     row.AHT;
 
 }
-
       delete entry.id;
 
       await FirebaseService.db
@@ -98,9 +110,9 @@ if (
       imported++;
     }
 
-    alert(
-      `✅ Imported ${imported} AHT records`
-    );
+alert(
+  `✅ Imported ${imported} ${App.statsOCR.lastImport.type} records`
+);
 
 document
   .getElementById(
