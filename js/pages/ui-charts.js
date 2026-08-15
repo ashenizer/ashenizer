@@ -197,7 +197,17 @@ if (val != null && !isNaN(val)) {
 
 
 
-App.ui.updatePerformanceChart = function (agentEmail) {
+App.ui.updatePerformanceChart = function(
+    agentEmail,
+    chart = App.ui.performanceChart
+) {
+
+const activeChart =
+  chart || App.ui.performanceChart;
+
+if (!activeChart) return;
+
+if (!activeChart) return;
   if (!App.ui.performanceChart) return;
 
   const isYTD = App.ui.currentChartTab === "ytd";
@@ -222,16 +232,16 @@ if (isYTD) {
   // ✅ CHANGE CHART TYPE (LINE / BAR)
   const newType = App.ui.chartMode === "monthly" ? "bar" : "line";
 
-  if (App.ui.performanceChart.config.type !== newType) {
-    App.ui.performanceChart.config.type = newType;
+  if (activeChart.config.type !== newType) {
+    activeChart.config.type = newType;
   }
 
   // ✅ APPLY DATA
-  App.ui.performanceChart.data.labels = data.labels;
+  activeChart.data.labels = data.labels;
 
 
 // ✅ ✅ DYNAMIC LABEL (🔥 ADD THIS HERE)
-App.ui.performanceChart.data.datasets[0].label =
+activeChart.data.datasets[0].label =
   App.ui.metric === "AHT"
     ? "AHT"
     : App.ui.metric === "Attendance"
@@ -542,4 +552,40 @@ App.ui.resetChart = function() {
   App.ui.performanceChart.update();
 };
 
+App.ui.initTLPerformanceChart = function () {
+
+  const canvas =
+    document.getElementById(
+      "tl-performance-chart"
+    );
+
+  if (!canvas) return;
+
+  if (App.ui.tlPerformanceChart) {
+    App.ui.tlPerformanceChart.destroy();
+  }
+
+  App.ui.tlPerformanceChart =
+    new Chart(canvas, {
+      type: "line",
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: "QA Score",
+            data: [],
+            borderWidth: 2,
+            tension: 0.4
+          },
+          {
+            label: "Team Avg",
+            data: [],
+            borderWidth: 2,
+            borderDash: [6, 6]
+          }
+        ]
+      }
+    });
+
+};
 

@@ -364,25 +364,50 @@ try {
 
   // ✅ Then add history
   
-const docRef = await FirebaseService.db
+const historyRef = FirebaseService.db
   .collection("stats")
   .doc(email)
-  .collection("history")
-  .add(entry);
+  .collection("history");
 
-// ✅ store the ID
-entry.id = docRef.id;
+// ✅ Check whether the date already exists
+const existingSnapshot = await historyRef
+  .where("date", "==", date)
+  .limit(1)
+  .get();
 
+if (!existingSnapshot.empty) {
 
-  console.log("✅ Saved to Firestore:", entry);
+  // ✅ Update existing entry
+  const existingDoc = existingSnapshot.docs[0];
 
-  // ✅ ALSO update local store
-  
-App.data.statsStore[email].history.push(entry);
+  await existingDoc.ref.set(entry, { merge: true });
 
-// ✅ ALSO store current separately
+  entry.id = existingDoc.id;
+
+  // ✅ Update local store
+  const index =
+    App.data.statsStore[email].history.findIndex(
+      h => h.id === existingDoc.id
+    );
+
+  if (index !== -1) {
+    App.data.statsStore[email].history[index] = {
+      ...App.data.statsStore[email].history[index],
+      ...entry
+    };
+  }
+
+} else {
+
+  // ✅ Create new day
+  const docRef = await historyRef.add(entry);
+
+  entry.id = docRef.id;
+
+  App.data.statsStore[email].history.push(entry);
+}
+
 App.data.statsStore[email].current = entry;
-
 
 } catch (error) {
   console.error("❌ FIRESTORE SAVE ERROR:", error);
@@ -409,16 +434,30 @@ if (teamStats) {
   if (attEl) attEl.textContent = teamStats.attendance;
 }
 
+// Clear stats form
+document.getElementById("modal-input-date").value = "";
+document.getElementById("modal-input-qa").value = "";
+document.getElementById("modal-input-aht").value = "";
+document.getElementById("modal-input-attendance").value = "";
+
+document.getElementById(
+  "modal-input-qa-disability-count"
+).value = "";
+
+const commercialInput =
+  document.getElementById(
+    "modal-input-qa-commercial-count"
+  );
+
+if (commercialInput) {
+  commercialInput.value = "";
+}
+
 
 alert("Stats saved ✅");
 
 // Refresh modal performance tab
-App.tlModal.showPerformance();
-
-// Switch back to Performance tab
-document
-  .querySelector('[data-tab="performance"]')
-  ?.click();
+App.tlModal.resetToPerformance();
 
 return;
 
@@ -567,19 +606,6 @@ if (qaComCountInput) qaComCountInput.value = "";
 commercialCountGroup?.classList.remove("hidden");
 
 }
-
-
-
-
-
-  // ✅ SHOW CHART
-App.ui.showChart();
-
-  // ✅ UPDATE CHART
-  App.ui.updatePerformanceChart(email);
-
-
-
 
   const agentName = App.data.users[email]?.name || "Selected Agent";
 

@@ -135,6 +135,61 @@ const history =
 const latest = history[0] || {};
 
 target.innerHTML = `
+
+    <div class="tl-performance-chart-card">
+
+        <div class="chart-tabs">
+            <button class="tab-btn active" data-tab="agent">
+                Monthly Performance
+            </button>
+
+            <button class="tab-btn" data-tab="ytd">
+                Year to Date
+            </button>
+        </div>
+
+        <div class="flex-between">
+
+            <div class="chart-toggle">
+                <button id="modal-toggle-daily"
+                    class="nav-btn active">
+                    Daily
+                </button>
+
+                <button id="modal-toggle-monthly"
+                    class="nav-btn">
+                    Monthly
+                </button>
+            </div>
+
+            <div class="chart-toggle">
+
+                <button id="modal-metric-qa"
+                    class="nav-btn active">
+                    QA
+                </button>
+
+                <button id="modal-metric-aht"
+                    class="nav-btn">
+                    AHT
+                </button>
+
+                <button id="modal-metric-att"
+                    class="nav-btn">
+                    Attendance
+                </button>
+
+            </div>
+
+        </div>
+
+        <canvas
+            id="tl-performance-chart"
+            height="120">
+        </canvas>
+
+    </div>
+
     <div class="stats-grid">
 
         <div class="stat-card">
@@ -155,7 +210,7 @@ target.innerHTML = `
             <p class="stat-label">Attendance</p>
             <p class="stat-value">
                 ${
-                    latest.Attendance != null
+                  latest.Attendance != null
                     ? Number(latest.Attendance).toFixed(2)
                     : "—"
                 }%
@@ -172,50 +227,93 @@ target.innerHTML = `
 
         <thead>
             <tr>
-<th>Date</th>
-<th>QA</th>
-<th>AHT</th>
-<th>Attendance</th>
-<th>Action</th>
-
+                <th>Date</th>
+                <th>QA</th>
+                <th>AHT</th>
+                <th>Attendance</th>
+                <th>Action</th>
             </tr>
         </thead>
 
         <tbody>
 
             ${history.map(row => `
-<tr>
-    <td>${row.date}</td>
+                <tr>
+                    <td>${row.date}</td>
+                    <td>${row.QA ?? "—"}%</td>
+                    <td>${row.AHT ?? "—"}</td>
 
-    <td>${row.QA ?? "—"}%</td>
+                    <td>
+                        ${
+                          row.Attendance != null
+                            ? Number(row.Attendance).toFixed(2)
+                            : "—"
+                        }%
+                    </td>
 
-    <td>${row.AHT ?? "—"}</td>
-
-    <td>
-        ${
-            row.Attendance != null
-            ? Number(row.Attendance).toFixed(2)
-            : "—"
-        }%
-    </td>
-
-    <td>
-        <button
-            class="modal-delete-history"
-            data-email="${email}"
-            data-id="${row.id}">
-            ❌
-        </button>
-    </td>
-
-</tr>
+                    <td>
+                        <button
+                            class="modal-delete-history"
+                            data-email="${email}"
+                            data-id="${row.id}">
+                            ❌
+                        </button>
+                    </td>
+                </tr>
             `).join("")}
 
         </tbody>
 
     </table>
+
 `;
 
+App.ui.initTLPerformanceChart();
+
+App.ui.updatePerformanceChart(
+    email,
+    App.ui.tlPerformanceChart
+);
+
+document
+  .getElementById("modal-metric-qa")
+  ?.addEventListener("click", () => {
+
+      App.ui.metric = "QA";
+
+      App.ui.updatePerformanceChart(
+          email,
+          App.ui.tlPerformanceChart
+      );
+
+  });
+
+document
+  .getElementById("modal-metric-aht")
+  ?.addEventListener("click", () => {
+
+      App.ui.metric = "AHT";
+
+      App.ui.updatePerformanceChart(
+          email,
+          App.ui.tlPerformanceChart
+      );
+
+  });
+
+document
+  .getElementById("modal-metric-att")
+  ?.addEventListener("click", () => {
+
+      App.ui.metric = "Attendance";
+
+      App.ui.updatePerformanceChart(
+          email,
+          App.ui.tlPerformanceChart
+      );
+
+  });
+        
 document
     .querySelectorAll(
         ".modal-delete-history"
@@ -437,4 +535,35 @@ document.addEventListener(
 
     }
 );
+
+App.tlModal.resetToPerformance = function() {
+
+    document
+        .querySelectorAll(".tl-tab")
+        .forEach(tab =>
+            tab.classList.remove("active")
+        );
+
+    document
+        .getElementById("tl-performance-tab")
+        ?.classList.remove("hidden");
+
+    document
+        .getElementById("tl-stats-tab")
+        ?.classList.add("hidden");
+
+    document
+        .getElementById("tl-incentives-tab")
+        ?.classList.add("hidden");
+
+    document
+        .getElementById("tl-notes-tab")
+        ?.classList.add("hidden");
+
+    document
+        .querySelector('[data-tab="performance"]')
+        ?.classList.add("active");
+
+    App.tlModal.showPerformance();
+};
 

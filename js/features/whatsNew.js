@@ -7,6 +7,41 @@ App.whatsNew.version = "2.1.0";
 App.whatsNew.updates = [
 
 {
+    version: "2.6.1",
+
+    released: "August 2026",
+
+    title: "📊 Team Lead Modal Workflow Improvements",
+
+    summary:
+        "The Team Lead Employee Performance Modal now provides a smoother stat-entry workflow with automatic refresh behavior, updated performance views, and improved usability after saving employee statistics.",
+
+    items: [
+
+        "Added automatic Performance tab refresh after saving employee stats.",
+
+        "Added automatic return to the Performance tab after successful stat submission.",
+
+        "Added real-time refresh of employee KPI cards after updates.",
+
+        "Added immediate Performance History refresh without reopening the employee profile.",
+
+        "Added automatic modal state restoration after stat entry.",
+
+        "Improved Team Lead stat-entry workflow and navigation.",
+
+        "Reduced repetitive tab switching after updating employee records.",
+
+        "Improved employee performance record visibility immediately after saving.",
+
+        "Enhanced Team Lead productivity during performance management activities.",
+
+        "Minor Team Lead modal stability and usability improvements."
+
+    ]
+},
+
+{
     version: "2.6.0",
 
     released: "August 2026",
