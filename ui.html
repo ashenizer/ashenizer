@@ -200,7 +200,23 @@
 
 
 			<section class="dashboard-content">
-				<h2 id="welcome"></h2>
+<div class="welcome-header">
+
+    <h2 id="welcome"></h2>
+
+    <button
+        id="leave-notification-btn"
+        class="hidden"
+    >
+        🔔
+        <span
+            id="leave-notification-count"
+        >
+            0
+        </span>
+    </button>
+
+</div>
 				<p class="text-muted fw-bold" id="role-badge"></p>
 				
 
@@ -625,25 +641,95 @@
 
   <div class="modal-content">
 
-    <h4>🌴 Vacation Leave</h4>
+<h4 id="leave-modal-title">
+    🌴 Vacation Leave
+</h4>
 
     <!-- ✅ show selected date -->
-    <p id="selected-date-label" class="text-center fw-bold"></p>
+<p id="selected-date-label" class="text-center fw-bold"></p>
+
+<div class="leave-tabs">
+
+  <button
+    id="leave-requests-tab"
+    class="leave-tab active"
+    type="button"
+  >
+    Pending Requests
+  </button>
+
+  <button
+    id="leave-add-tab"
+    class="leave-tab"
+    type="button"
+  >
+    Add Leave
+  </button>
+
+</div>
+
+<div
+    id="leave-requests-panel"
+    class="leave-panel"
+>
+
+    <div id="leave-pending-list">
+
+        No pending requests.
+
+    </div>
+
+</div>
+
+<div
+    id="leave-add-panel"
+    class="leave-panel hidden"
+>
+
+<div
+  id="request-employee-group"
+  class="hidden"
+>
+
+        <label>Employee</label>
+
+        <input
+            id="request-employee-name"
+            readonly
+        >
+
+    </div>
 
     <select id="leave-employee"></select>
 
     <select id="leave-status">
-      <option value="Pending">Pending</option>
-      <option value="Approved">Approved</option>
-      <option value="Denied">Denied</option>
+        <option value="Requested">Requested</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Denied">Denied</option>
     </select>
 
-    <div class="modal-actions">
-      <button id="save-leave" class="nav-btn btn-primary">Save</button>
-      <button id="close-leave" class="nav-btn">Cancel</button>
-    </div>
+</div>
 
-  </div>
+<div class="modal-actions">
+
+    <button
+        id="save-leave"
+        class="nav-btn btn-primary"
+    >
+        Save
+    </button>
+
+    <button
+        id="close-leave"
+        class="nav-btn"
+    >
+        Cancel
+    </button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -760,9 +846,6 @@
 
 </div>
 
-
-
-    </div>
 
 <div id="confirm-modal" class="confirm-modal hidden">
 
@@ -931,12 +1014,23 @@
             class="mt-20"
         ></div>
 
-        <button
-            id="close-vacation-alert"
-            class="nav-btn btn-primary"
-        >
-            Review Later
-        </button>
+<div class="modal-actions">
+
+    <button
+        id="close-vacation-alert"
+        class="nav-btn"
+    >
+        Review Later
+    </button>
+
+    <button
+        id="vacation-alert-save"
+        class="nav-btn btn-primary"
+    >
+        Save
+    </button>
+
+</div>
 
     </div>
 
@@ -1461,6 +1555,189 @@
 </div>
 </div>
 
+<div
+    id="leave-screenshot-modal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <h3>📸 Upload Leave Balance</h3>
+
+<p id="leave-screenshot-message">
+
+    🌸 To finalize your vacation request,
+    please upload a screenshot of your
+    current leave balance.
+
+    <br><br>
+
+    Paste, drag & drop, or browse for your
+    leave balance screenshot.
+
+</p>
+
+        <div
+            id="leave-screenshot-dropzone"
+            class="ocr-dropzone"
+        >
+
+            <div class="ocr-icon">
+                📸
+            </div>
+
+            <div class="ocr-title">
+                Upload Screenshot
+            </div>
+
+            <div class="ocr-subtitle">
+                Drag & Drop • Click • Ctrl + V
+            </div>
+
+            <input
+                type="file"
+                id="leave-screenshot-input"
+                accept="image/*"
+                hidden
+            >
+
+        </div>
+
+        <img
+            id="leave-screenshot-preview"
+            style="
+                width:100%;
+                margin-top:15px;
+                display:none;
+                border-radius:10px;
+            "
+        >
+
+        <div class="modal-actions">
+
+            <button
+                id="send-leave-email"
+                class="nav-btn btn-primary"
+            >
+                Send Request 💌
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div
+    id="leave-success-modal"
+    class="modal hidden"
+>
+
+    <div class="modal-content leave-success-card">
+
+        <div
+            style="
+                font-size:60px;
+                text-align:center;
+            "
+        >
+            💌
+        </div>
+
+        <h2
+            style="
+                text-align:center;
+            "
+        >
+            Request Sent!
+        </h2>
+
+        <p
+            style="
+                text-align:center;
+            "
+        >
+            Your vacation request has been
+            submitted successfully.
+        </p>
+
+        <div
+            style="
+                background:#fdf4ff;
+                padding:15px;
+                border-radius:10px;
+                margin-top:15px;
+                text-align:center;
+            "
+        >
+
+            ✅ Your Team Lead has been notified.
+
+            <br><br>
+
+            📎 Leave balance screenshot attached.
+
+            <br><br>
+
+            🌴 Request status:
+            <strong>Pending Review</strong>
+
+        </div>
+
+        <div class="modal-actions">
+
+            <button
+                id="close-leave-success"
+                class="nav-btn btn-primary"
+            >
+                Awesome 💖
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div
+    id="leave-notification-modal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <h3>
+            🔔 Vacation Requests
+        </h3>
+
+        <div
+            id="leave-notification-list"
+        >
+        </div>
+
+        <div class="modal-actions">
+
+            <button
+                id="save-leave-notifications"
+                class="nav-btn btn-primary"
+            >
+                Save
+            </button>
+
+            <button
+                id="close-leave-notifications"
+                class="nav-btn"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 
 	</main>
 	<footer>
@@ -1470,6 +1747,7 @@
 		
 
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 		
 
@@ -1506,6 +1784,9 @@
 <script src="js/roles/admin.js"></script>
 
 
+<script>
+emailjs.init("0rrn_74V66MuuIM01");
+</script>
 		
 
 	</body>

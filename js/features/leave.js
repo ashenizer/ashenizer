@@ -9,6 +9,38 @@ App.leave.currentLeaveDate = null;
 
 App.leave.init = function () {
 
+const requestsTab =
+    document.getElementById("leave-requests-tab");
+
+const addTab =
+    document.getElementById("leave-add-tab");
+
+const requestsPanel =
+    document.getElementById("leave-requests-panel");
+
+const addPanel =
+    document.getElementById("leave-add-panel");
+
+requestsTab?.addEventListener("click", () => {
+
+    requestsTab.classList.add("active");
+    addTab.classList.remove("active");
+
+    requestsPanel.classList.remove("hidden");
+    addPanel.classList.add("hidden");
+
+});
+
+addTab?.addEventListener("click", () => {
+
+    addTab.classList.add("active");
+    requestsTab.classList.remove("active");
+
+    addPanel.classList.remove("hidden");
+    requestsPanel.classList.add("hidden");
+
+});
+
   document.getElementById("close-leave")?.addEventListener("click", () => {
     document.getElementById("leave-modal").classList.add("hidden");
   });
@@ -20,9 +52,83 @@ App.leave.init = function () {
   });
 
 document.getElementById("save-leave")?.addEventListener("click", async () => {
-  const name = document.getElementById("leave-employee").value;
-  const status = document.getElementById("leave-status").value;
-  const date = App.leave.currentLeaveDate;
+
+const requestsPanelVisible =
+    !document
+        .getElementById("leave-requests-panel")
+        .classList.contains("hidden");
+
+if (requestsPanelVisible) {
+
+    const dropdowns =
+        document.querySelectorAll(
+            ".pending-request-status"
+        );
+
+    for (const dropdown of dropdowns) {
+
+const card =
+    dropdown.closest(".pending-request-card");
+
+const employeeName =
+    card.querySelector("strong").textContent;
+
+const requestId =
+    dropdown.dataset.id;
+
+        const status =
+            dropdown.value;
+
+await FirebaseService.db
+    .collection("leaveRequests")
+    .doc(requestId)
+    .update({
+        status
+    });
+
+const vacationSnapshot =
+    await FirebaseService.db
+        .collection("vacationRequests")
+        .where(
+            "employeeName",
+            "==",
+            employeeName
+        )
+        .get();
+
+for (const doc of vacationSnapshot.docs) {
+
+    await doc.ref.delete();
+
+}
+
+
+    }
+
+    await App.leave.loadRequestedLeaves();
+    await App.leave.loadLeaveRequests();
+
+    document
+        .getElementById("leave-modal")
+        .classList.add("hidden");
+
+    return;
+}
+
+  const name =
+      App.leave.isRequestMode
+          ? App.leave.currentEmployee
+          : document.getElementById(
+                "leave-employee"
+            ).value;
+
+  const status =
+      document.getElementById(
+          "leave-status"
+      ).value;
+
+  const date =
+      App.leave.currentLeaveDate;
 
   try {
 
@@ -43,12 +149,11 @@ for (const doc of requested.docs) {
     data.dates.includes(date)
   ) {
 
-    await FirebaseService.db
-      .collection("vacationRequests")
-      .doc(doc.id)
-      .update({
-        status
-      });
+await FirebaseService.db
+    .collection("vacationRequests")
+    .doc(doc.id)
+    .delete();
+
 
     requestUpdated = true;
 
@@ -129,11 +234,49 @@ await App.leave.loadRequestedLeaves();
 
 };
 
-App.leave.openLeaveModal = function(dateKey) {
+App.leave.openLeaveModal =
+function(
+    dateKey,
+    employeeName = null,
+    isRequest = false
+) {
+
+
 
   App.leave.currentLeaveDate = dateKey;
 
+App.leave.currentEmployee =
+    employeeName;
+
+App.leave.isRequestMode =
+    isRequest;
+
   const modal = document.getElementById("leave-modal");
+
+const title =
+    document.getElementById(
+        "leave-modal-title"
+    );
+
+if (isRequest) {
+
+    title.textContent =
+        "🔄 Change Status";
+
+    document
+        .getElementById("leave-add-tab")
+        ?.click();
+
+} else {
+
+    title.textContent =
+        "➕ Add Leave";
+
+    document
+        .getElementById("leave-requests-tab")
+        ?.click();
+
+}
   modal.classList.remove("hidden");
 
   const label = document.getElementById("selected-date-label");
@@ -142,13 +285,159 @@ App.leave.openLeaveModal = function(dateKey) {
     label.textContent = "📅 " + dateKey;
   }
 
+const pendingList =
+    document.getElementById(
+        "leave-pending-list"
+    );
+
+console.log(
+    "Modal Date:",
+    dateKey
+);
+
+console.log(
+    "Requested Leaves:",
+    App.leave.requestedLeaves
+);
+
+console.log(
+    "For Date:",
+    App.leave.requestedLeaves[dateKey]
+);
+
+const requests =
+    App.leave.leaveRequests[
+        dateKey
+    ] || [];
+
+if (!requests.length) {
+
+    pendingList.innerHTML =
+        "<p>No pending requests.</p>";
+
+} else {
+
+pendingList.innerHTML =
+    requests.map(r => `
+        <div class="pending-request-card">
+
+            <strong>
+                ${r.name}
+            </strong>
+
+            <div class="mt-10">
+
+                <label>Status</label>
+
+<select
+    class="pending-request-status"
+    data-id="${r.id}"
+>
+
+                    <option
+                        value="Pending"
+                        ${r.status === "Pending"
+                            ? "selected"
+                            : ""}
+                    >
+                        Pending
+                    </option>
+
+                    <option
+                        value="Approved"
+                        ${r.status === "Approved"
+                            ? "selected"
+                            : ""}
+                    >
+                        Approved
+                    </option>
+
+                    <option
+                        value="Denied"
+                        ${r.status === "Denied"
+                            ? "selected"
+                            : ""}
+                    >
+                        Denied
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+    `).join("");
+
+}
+
   const select = document.getElementById("leave-employee");
 
   select.innerHTML = Object.values(App.data.users)
     .filter(u => u.role === "employee")
     .map(u => `<option value="${u.name}">${u.name}</option>`)
     .join("");
+
+if (employeeName) {
+
+    select.value = employeeName;
+
+}
+
+const requestEmployeeGroup =
+    document.getElementById(
+        "request-employee-group"
+    );
+
+const requestEmployeeName =
+    document.getElementById(
+        "request-employee-name"
+    );
+
+if (isRequest) {
+
+    requestEmployeeGroup
+        ?.classList.remove("hidden");
+
+    select.classList.add("hidden");
+
+    requestEmployeeName.value =
+        employeeName || "";
+
+} else {
+
+    requestEmployeeGroup
+        ?.classList.add("hidden");
+
+    select.classList.remove("hidden");
+
+}
+const statusSelect =
+    document.getElementById(
+        "leave-status"
+    );
+
+statusSelect.value =
+    "Pending";
+
+if (isRequest) {
+
+    const request =
+        App.leave.requestedLeaves[dateKey]
+        ?.find(
+            r => r.name === employeeName
+        );
+
+    if (request) {
+
+        statusSelect.value =
+            request.status;
+
+    }
+
+}
 };
+
+
 
 App.leave.initLeaveCalendar = function () {
   const dropdown = document.getElementById("calendar-month");
@@ -325,14 +614,36 @@ requestedEntries.forEach(e => {
     return;
   }
 
-  const tag = document.createElement("div");
+const tag = document.createElement("div");
 
-  tag.className = "calendar-entry requested";
+const statusClass =
+    e.status.toLowerCase();
 
-  tag.textContent =
-  `${e.name} (${e.status})`;
+tag.className =
+    `calendar-entry ${statusClass}`;
+
+tag.textContent =
+    `${e.name} (${e.status})`;
 
   cell.appendChild(tag);
+
+tag.style.cursor = "pointer";
+
+if (isTL) {
+
+    tag.addEventListener("click", (event) => {
+
+        event.stopPropagation();
+
+        App.leave.openLeaveModal(
+            dateKey,
+            e.name,
+            true
+        );
+
+    });
+
+}
 
 });
 
@@ -379,11 +690,13 @@ if (!App.leave.leaveRequests[data.date]) {
   App.leave.leaveRequests[data.date] = [];
 }
 
-    App.leave.leaveRequests[data.date].push({
+App.leave.leaveRequests[data.date].push({
 
-      name: data.name,
-      status: data.status
-    });
+  id: doc.id,
+  name: data.name,
+  status: data.status
+
+});
   });
 
   console.log("✅ Loaded leave data:", App.leave.leaveRequests);

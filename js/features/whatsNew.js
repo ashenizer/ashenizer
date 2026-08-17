@@ -7,6 +7,50 @@ App.whatsNew.version = "2.1.0";
 App.whatsNew.updates = [
 
 {
+    version: "2.7.0",
+
+    released: "August 2026",
+
+    title: "🌴 Vacation Request Automation Upgrade",
+
+    summary:
+        "Vacation requests have been redesigned with automatic email delivery, per-day request tracking, improved Team Lead approvals, and a streamlined leave management workflow.",
+
+    items: [
+
+        "Added automatic vacation request email delivery to Team Leads.",
+
+        "Employees no longer need to manually copy and paste leave request emails.",
+
+        "Employees no longer need to manually send Outlook leave request emails after submission.",
+
+        "Added automatic leave notification workflow after request submission.",
+
+        "Redesigned vacation request processing for improved approval management.",
+
+        "Vacation requests are now stored individually per requested date.",
+
+        "Each requested leave day now generates its own request record.",
+
+        "Team Leads can now approve, deny, or review leave dates individually.",
+
+        "Improved vacation approval flexibility for multi-day leave requests.",
+
+        "Enhanced vacation request tracking and visibility on the calendar.",
+
+        "Improved Team Lead notification accuracy for pending leave requests.",
+
+        "Improved synchronization between vacation requests and approved leave records.",
+
+        "Improved leave request reliability and data consistency.",
+
+        "Streamlined overall employee and Team Lead leave management experience."
+
+    ]
+},
+
+
+{
     version: "2.6.1",
 
     released: "August 2026",

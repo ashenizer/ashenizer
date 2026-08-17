@@ -897,6 +897,20 @@ document.addEventListener(
   "paste",
   event => {
 
+    const leaveModal =
+      document.getElementById(
+        "leave-screenshot-modal"
+      );
+
+    if (
+      leaveModal &&
+      !leaveModal.classList.contains(
+        "hidden"
+      )
+    ) {
+      return;
+    }
+
     const items =
       event.clipboardData?.items;
 
