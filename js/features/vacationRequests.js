@@ -2,7 +2,6 @@ window.App = window.App || {};
 
 App.vacationRequests = {};
 
-App.vacationRequests.leaveScreenshot = null;
 
 App.vacationRequests.isSelecting = false;
 
@@ -109,7 +108,7 @@ document.getElementById(
 App.vacationRequests.submitRequest =
 async function() {
 
-console.log("🚀 submitRequest fired");
+    console.log("🚀 submitRequest fired");
 
     try {
 
@@ -142,106 +141,94 @@ console.log("🚀 submitRequest fired");
                 "extra-days-reason"
             )?.value || "";
 
-console.log("Vacation Request Data", {
-    employeeId: App.currentUser.email,
-    employeeName: App.currentUser.name,
-    dates,
-    reason
-});
+        for (const date of dates) {
 
-for (const date of dates) {
+            const docRef =
+                await FirebaseService.db
+                    .collection(
+                        "vacationRequests"
+                    )
+                    .add({
 
-    const docRef =
-        await FirebaseService.db
-            .collection("vacationRequests")
-            .add({
+                        employeeId:
+                            App.currentUser.email ||
+                            App.currentUser.username ||
+                            App.currentUser.name,
 
-employeeId:
-    App.currentUser.email ||
-    App.currentUser.username ||
-    App.currentUser.name,
+                        employeeName:
+                            App.currentUser.name,
 
-                employeeName:
-                    App.currentUser.name,
+                        date,
 
-                date,
+                        reason,
 
-                reason,
+                        status:
+                            "Requested",
 
-                status:
-                    "Requested",
+                        createdAt:
+                            firebase.firestore
+                                .FieldValue
+                                .serverTimestamp()
 
-                createdAt:
-                    firebase.firestore
-                        .FieldValue
-                        .serverTimestamp()
+                    });
 
-            });
+            console.log(
+                "✅ Saved Request:",
+                docRef.id,
+                date
+            );
 
-    console.log(
-        "✅ Saved Request:",
-        docRef.id,
-        date
-    );
-}
+        }
 
+        await App.leave.loadRequestedLeaves();
 
-await App.leave.loadRequestedLeaves();
+        try {
 
-try {
+            await App.vacationRequests
+                .sendEmail(
+                    dates,
+                    reason
+                );
 
-App.vacationRequests.pendingDates =
-    dates;
+            console.log(
+                "✅ Leave request email sent automatically"
+            );
 
-App.vacationRequests.pendingReason =
-    reason;
+        } catch (emailError) {
 
-document
-    .getElementById(
-        "leave-screenshot-modal"
-    )
-    .classList
-    .remove("hidden");
+            console.error(
+                "❌ Email failed:",
+                emailError
+            );
 
-console.log(
-    "📸 Waiting for screenshot upload"
-);
+        }
 
+        document.getElementById(
+            "extra-days-reason"
+        ).value = "";
 
-} catch (error) {
+        document.getElementById(
+            "additional-days-section"
+        )?.classList.add(
+            "hidden"
+        );
 
-    console.error(
-        "❌ Email failed:",
-        error
-    );
+        document.getElementById(
+            "add-more-days"
+        ).textContent =
+            "➕ Add More Days";
 
-    alert(
-        "Leave request saved, but email notification failed."
-    );
+        document.getElementById(
+            "leave-request-modal"
+        ).classList.add(
+            "hidden"
+        );
 
-}
-
-// 💖 Clear reason box
-document.getElementById(
-    "extra-days-reason"
-).value = "";
-
-// 💖 Hide extra days section again
-document.getElementById(
-    "additional-days-section"
-)?.classList.add("hidden");
-
-document.getElementById(
-    "add-more-days"
-).textContent =
-    "➕ Add More Days";
-
-document
-    .getElementById(
-        "leave-request-modal"
-    )
-    .classList
-    .add("hidden");
+        document.getElementById(
+            "leave-success-modal"
+        ).classList.remove(
+            "hidden"
+        );
 
     } catch (error) {
 
@@ -873,103 +860,9 @@ document
         }
     );
 
-document
-    .getElementById(
-        "send-leave-email"
-    )
-    ?.addEventListener(
-        "click",
-        async () => {
 
-            if (
-                !App.vacationRequests
-                    .leaveScreenshot
-            ) {
 
-const message =
-    document.getElementById(
-        "leave-screenshot-message"
-    );
 
-message.innerHTML = `
-    ❌ Screenshot Required
-
-    <br><br>
-
-    Please upload your leave balance
-    screenshot before sending the request.
-`;
-
-return;
-            }
-
-            try {
-
-                const imageUrl =
-                    await App
-                    .vacationRequests
-                    .uploadLeaveImage(
-                        App
-                        .vacationRequests
-                        .leaveScreenshot
-                    );
-
-                await App
-                    .vacationRequests
-                    .sendEmail(
-                        App
-                        .vacationRequests
-                        .pendingDates,
-
-                        App
-                        .vacationRequests
-                        .pendingReason,
-
-                        imageUrl
-                    );
-
-                // Reset screenshot state
-
-App.vacationRequests.leaveScreenshot =
-    null;
-
-preview.src = "";
-
-preview.style.display =
-    "none";
-
-// Hide upload modal
-
-document
-    .getElementById(
-        "leave-screenshot-modal"
-    )
-    .classList.add(
-        "hidden"
-    );
-
-// Show success modal
-
-document
-    .getElementById(
-        "leave-success-modal"
-    )
-    .classList.remove(
-        "hidden"
-    );
-
-            } catch(error) {
-
-                console.error(error);
-
-                alert(
-                    "❌ Failed to send email."
-                );
-
-            }
-
-        }
-    );
 
 document
     .getElementById("submit-request")
@@ -1268,8 +1161,7 @@ Screenshot of current leave credits:
 App.vacationRequests.sendEmail =
 async function (
     dates,
-    reason,
-    screenshotUrl
+    reason
 ) {
 
 return emailjs.send(
@@ -1289,44 +1181,11 @@ return emailjs.send(
             reason ||
             "Personal Time Off",
 
-        screenshot_url:
-            screenshotUrl
     }
 );
 
 };
 
-App.vacationRequests.uploadLeaveImage =
-async function(file) {
-
-    const formData =
-        new FormData();
-
-    formData.append(
-        "file",
-        file
-    );
-
-    formData.append(
-        "upload_preset",
-        "profile_upload"
-    );
-
-    const response =
-        await fetch(
-            "https://api.cloudinary.com/v1_1/dbivddinj/image/upload",
-            {
-                method: "POST",
-                body: formData
-            }
-        );
-
-    const data =
-        await response.json();
-
-    return data.secure_url;
-
-};
 
 App.vacationRequests.loadNotificationRequests =
 async function() {
