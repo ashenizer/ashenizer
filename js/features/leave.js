@@ -88,7 +88,8 @@ await FirebaseService.db
 
 const vacationSnapshot =
     await FirebaseService.db
-        .collection("vacationRequests")
+        
+
         .where(
             "employeeName",
             "==",

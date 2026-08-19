@@ -7,6 +7,49 @@ App.whatsNew.version = "2.1.0";
 App.whatsNew.updates = [
 
 {
+    version: "2.8.0",
+
+    released: "August 2026",
+
+    title: "🏆 Achievement Dashboard & Personal Ranking",
+
+    summary:
+        "Employees can now instantly view their personal standing through a redesigned Achievement Dashboard featuring Overall Rank tracking, Overall Score visibility, enhanced leaderboards, and improved performance recognition.",
+
+    items: [
+
+        "Added employee Overall Rank tracking.",
+
+        "Added personal 'My Overall Rank' achievement card.",
+
+        "Added Overall Score visibility directly within the Achievements section.",
+
+        "Added employee-focused performance summary dashboard.",
+
+        "Added personalized ranking visibility without requiring Team Lead access.",
+
+        "Improved employee engagement through clearer performance recognition.",
+
+        "Enhanced Top Agent leaderboard presentation.",
+
+        "Improved achievement card layout and ranking visibility.",
+
+        "Redesigned achievement experience to highlight individual performance standing.",
+
+        "Improved employee awareness of overall team placement.",
+
+        "Enhanced visual hierarchy for rankings and performance results.",
+
+        "Improved Achievements page readability and presentation.",
+
+        "Added stronger performance motivation through real-time rank visibility.",
+
+        "Refined achievement dashboard styling and user experience."
+
+    ]
+},
+
+{
     version: "2.7.0",
 
     released: "August 2026",

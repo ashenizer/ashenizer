@@ -186,23 +186,17 @@ const ranking = document.getElementById("ranking-section");
 const bulletin = document.getElementById("bulletin-section");
 const stats = document.getElementById("section-dashboard");
 const leave = document.getElementById("section-leave");
+const achievement =
+    document.getElementById(
+        "section-achievement"
+    );
 
-        
-
-if (ranking) {
-  ranking.style.display = "none";
-
-  // ✅ ALSO hide children (force it)
-  ranking.querySelectorAll("*").forEach(child => {
-    child.style.display = "none";
-  });
-}
-
-
+	ranking?.classList.add("hidden");
         bulletin?.classList.add("hidden");
         stats?.classList.add("hidden");
         App.ui.hideChart();
         leave?.classList.add("hidden");
+        achievement?.classList.add("hidden");
 
 document
   .getElementById("section-news")
@@ -235,7 +229,8 @@ console.log("📊 PERFORMANCE CLICKED");
   // ✅ EMPLOYEE VIEW
   if (App.currentUser?.role === "employee") {
     stats?.classList.remove("hidden");
-    ranking?.classList.add("hidden"); // ✅ force hide ranking
+ranking?.classList.add("hidden");
+
 
 App.employee.updatePersonalStats(App.currentUserEmail);
 App.employee.renderEmployeeHistory(App.currentUserEmail);
@@ -247,7 +242,8 @@ App.employee.loadTLNote();
 if (App.currentUser?.role === "teamlead") {
 
   stats?.classList.add("hidden");
-  ranking?.classList.add("hidden");
+ranking?.classList.add("hidden");
+
 
   
   // ✅ ADD THIS BACK
@@ -325,21 +321,23 @@ else if (section === "news") {
 
   gallery?.classList.remove("hidden");
 
+} else if (section === "achievement") {
 
+  achievement?.classList.remove("hidden");
 
-} else if (section === "ranking") {
-  if (ranking) {
-    ranking.style.display = "block";
+  console.log(
+    "employee-view height:",
+    document.getElementById("employee-view")?.offsetHeight
+  );
 
-    // ✅ restore children display
-    ranking.querySelectorAll("*").forEach(child => {
-      child.style.display = "";
-    });
-  }
+  console.log(
+    "achievement height:",
+    achievement?.offsetHeight
+  );
+
+  App.achievements.load();
+
 }
-
-
-
 
 
 if (section !== "dashboard") {

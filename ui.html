@@ -11,7 +11,9 @@
 		<link rel="stylesheet" href="css/forgot.css">
 		<link rel="stylesheet" href="css/ocr.css">
 		<link rel="stylesheet" href="css/performanceModal.css">
+		<link rel="stylesheet" href="css/achievements.css">
 		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Nunito:wght@300;400;700&family=Pacifico&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 	</head>
 	<body>
@@ -407,6 +409,7 @@
     </table>
   </div>
 </div>
+</div>
 
 
 
@@ -420,12 +423,107 @@
 
 
   <!-- ✅ ACHIEVEMENTS -->
-  <div id="section-achievement" class="dashboard-section hidden">
+
+<div id="section-achievement" class="dashboard-section hidden">
+
+<div id="employee-ranking-summary">
+
+    <div class="employee-summary-card">
+
+        <div class="employee-summary-rank">
+            🏆
+            <span id="employee-current-rank">
+                #5
+            </span>
+        </div>
+
+        <div class="employee-summary-label">
+            My Overall Rank
+        </div>
+
+        <div class="employee-summary-divider"></div>
+
+        <div class="employee-summary-score">
+            ⭐
+            <span id="employee-overall-score">
+                85.66%
+            </span>
+        </div>
+
+        <div class="employee-summary-label">
+            My Overall Score
+        </div>
+
+    </div>
+
+</div>
 
 
-    <h3>Achievements</h3>
-    <p>🏆 Top Performer this month</p>
-  </div>
+    <h2>🏆 Team Achievements</h2>
+
+    <div id="achievement-grid">
+      
+
+        <div class="achievement-card">
+
+            <h3>👑 Top Agent</h3>
+
+            <div id="achievement-top-agent"></div>
+
+        </div>
+<div class="achievement-bottom-tier">
+
+        <div class="achievement-card">
+
+            <h3>⚡ Best AHT</h3>
+
+            <div id="achievement-top-aht"></div>
+
+        </div>
+
+        <div class="achievement-card">
+
+            <h3>🎯 Best Attendance</h3>
+
+            <div id="achievement-top-att"></div>
+
+        </div>
+<div class="achievement-card">
+
+    <h3>✅ Best QA</h3>
+
+    <div id="achievement-top-qa"></div>
+
+</div>
+
+</div>
+
+<div id="achievement-ranking-board">
+
+    <div class="achievement-card">
+        <h3>👑 Top Agent</h3>
+        <div id="ranking-top-agent"></div>
+    </div>
+
+    <div class="achievement-card">
+        <h3>✅ Best QA</h3>
+        <div id="ranking-top-qa"></div>
+    </div>
+
+    <div class="achievement-card">
+        <h3>⚡ Best AHT</h3>
+        <div id="ranking-top-aht"></div>
+    </div>
+
+    <div class="achievement-card">
+        <h3>🎯 Best Attendance</h3>
+        <div id="ranking-top-att"></div>
+    </div>
+
+</div>
+    </div>
+
+</div>
 
 <!-- ✅ HAPPY SNAPS -->
 
@@ -440,8 +538,6 @@
 
 <!-- ✅ Employee Performance History -->
 					
-
-				</div>
 
 </div>
 
@@ -1704,6 +1800,7 @@
 <script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
 <script src="js/features/statsOCR.js"></script>
 <script src="js/features/statsImport.js"></script>
+<script src="js/features/achievements.js"></script>
 <script src="js/roles/employee.js"></script>
 <script src="js/roles/tl.js"></script>
 <script src="js/pages/ui-charts.js"></script>
