@@ -79,18 +79,21 @@ function() {
                             user.AHT
                         );
 
-                return {
+const overall =
+    isNaN(user.QA) ||
+    isNaN(user.Attendance) ||
+    isNaN(user.AHT)
+        ? null
+        : (
+            user.QA +
+            user.Attendance +
+            ahtScore
+          ) / 3;
 
-                    ...user,
-
-                    Overall:
-                        (
-                            user.QA +
-                            user.Attendance +
-                            ahtScore
-                        ) / 3
-
-                };
+return {
+    ...user,
+    Overall: overall
+};
 
             });
 
@@ -704,10 +707,16 @@ function(email) {
 
             });
 
-    users.sort(
-        (a, b) =>
-            b.Overall - a.Overall
-    );
+
+
+const rankedUsers = users.filter(
+    user => !isNaN(user.Overall)
+);
+
+rankedUsers.sort(
+    (a, b) =>
+        b.Overall - a.Overall
+);
 
     const rank =
         users.findIndex(
@@ -744,6 +753,8 @@ console.log(
     App.auth.currentUser
 );
 
+
+
 const email =
     App.currentUserEmail;
 
@@ -775,26 +786,38 @@ const email =
 
             });
 
-    users.sort(
-        (a, b) =>
-            b.Overall - a.Overall
-    );
+const rankedUsers = users.filter(
+    user => !isNaN(user.Overall)
+);
+
+rankedUsers.sort(
+    (a, b) =>
+        b.Overall - a.Overall
+);
+
+console.table(
+  users.map((u, i) => ({
+    Rank: i + 1,
+    Name: u.name,
+    Overall: Number(u.Overall.toFixed(2))
+  }))
+);
 
 console.log(
     "Stats users:",
     users
 );
 
-    const index =
-        users.findIndex(
+const index =
+    rankedUsers.findIndex(
             user =>
                 user.email === email
         );
 
     if (index === -1) return;
 
-    const currentUser =
-        users[index];
+const currentUser =
+    rankedUsers[index];
 
     document.getElementById(
         "employee-current-rank"
