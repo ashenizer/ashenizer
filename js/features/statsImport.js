@@ -1,6 +1,7 @@
 window.App = window.App || {};
 
 App.statsImport = {};
+App.statsExcel = {};
 
 
 App.statsImport.importAHT = async function () {
@@ -134,3 +135,82 @@ document
   }
 
 };
+
+
+App.statsExcel.downloadTemplate =
+function () {
+
+    const rows =
+        App.statsOCR.lastImport?.rows || [];
+
+    if (!rows.length) {
+
+        alert(
+            "No OCR data available."
+        );
+
+        return;
+
+    }
+
+    const csvRows = [
+
+        "Employee,QA,Evaluations,AHT,Attendance"
+
+    ];
+
+    rows.forEach(row => {
+
+        csvRows.push([
+            row.name || "",
+            row.QA ?? "",
+            row.Evaluations ?? "",
+            row.AHT ?? "",
+            row.Attendance ?? ""
+        ].join(","));
+
+    });
+
+    const csv =
+        csvRows.join("\n");
+
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type: "text/csv"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+
+    a.download =
+        `KPI_${App.statsOCR.lastImport.type}.csv`;
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+};
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    document
+      .getElementById(
+        "download-kpi-template"
+      )
+      ?.addEventListener(
+        "click",
+        App.statsExcel.downloadTemplate
+      );
+
+  }
+);

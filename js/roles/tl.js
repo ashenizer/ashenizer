@@ -621,3 +621,104 @@ return;
 
 
 
+App.tl.loadTeamSummary = async function () {
+
+    console.log("🚀 TEAM SUMMARY CLICKED");
+
+    const body =
+        document.getElementById(
+            "team-summary-body"
+        );
+
+    console.log("BODY:", body);
+
+    if (!body) return;
+
+    body.innerHTML = "";
+
+    const team =
+        App.currentUser?.team;
+
+    if (!team) return;
+
+    const members =
+        await App.data.getTeamMembers(team);
+
+    console.log("MEMBERS:", members);
+
+for (const member of members) {
+
+    console.log("MEMBER:", member);
+
+    if (member.role !== "employee")
+        continue;
+
+    console.log(
+        "ADDING:",
+        member.name
+    );
+
+    const current =
+        App.data.statsStore[
+            member.email
+        ]?.current;
+
+    console.log(
+        "CURRENT:",
+        current
+    );
+
+    const row =
+        document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${member.name}</td>
+        <td>${current?.QA ?? "-"}</td>
+        <td>${current?.Attendance ?? "-"}</td>
+        <td>${current?.AHT ?? "-"}</td>
+    `;
+
+    body.appendChild(row);
+
+    console.log(
+        "ROWS:",
+        body.children.length
+    );
+}
+
+
+};
+
+
+
+App.tl.downloadTeamSummaryImage =
+async function () {
+
+    const section =
+        document.getElementById(
+            "section-team-summary"
+        );
+
+    if (!section) return;
+
+    const canvas =
+        await html2canvas(section, {
+            scale: 2,
+            backgroundColor: "#ffffff"
+        });
+
+    const link =
+        document.createElement("a");
+
+    link.download =
+        `TeamSummary_${
+            new Date()
+            .toISOString()
+            .slice(0,10)
+        }.png`;
+
+    link.href =
+        canvas.toDataURL("image/png");
+
+    link.click();
+};

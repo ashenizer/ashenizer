@@ -44,11 +44,23 @@ App.gallery?.init();
 // ✅ LOAD DROPDOWN
 await App.tl.populateAgentDropdown();
 
+
+document
+.getElementById(
+    "download-team-summary"
+)
+?.addEventListener(
+    "click",
+    App.tl.downloadTeamSummaryImage
+);
+
 // ✅ update ranking after everything loads
 // App.ranking.updateRanking();
 
 // ✅ hide personal stats initially
 document.getElementById("section-dashboard")?.classList.add("hidden");
+
+
 
 // ✅ hide chart initially
 App.ui.hideChart();
@@ -190,6 +202,10 @@ const achievement =
     document.getElementById(
         "section-achievement"
     );
+const teamSummary =
+  document.getElementById(
+    "section-team-summary"
+  );
 
 	ranking?.classList.add("hidden");
         bulletin?.classList.add("hidden");
@@ -197,6 +213,7 @@ const achievement =
         App.ui.hideChart();
         leave?.classList.add("hidden");
         achievement?.classList.add("hidden");
+	teamSummary?.classList.add("hidden");
 
 document
   .getElementById("section-news")
@@ -336,6 +353,16 @@ else if (section === "news") {
   );
 
   App.achievements.load();
+
+}
+
+else if (section === "team-summary") {
+
+  document
+    .getElementById("section-team-summary")
+    ?.classList.remove("hidden");
+
+  App.tl.loadTeamSummary();
 
 }
 
