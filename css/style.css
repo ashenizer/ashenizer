@@ -2817,5 +2817,181 @@ img {
 }
 
 
+/* ==================================
+   📈 TEAM SUMMARY
+================================== */
+
+
+#section-team-summary {
+  animation: fadeInUp 0.35s ease;
+}
+
+#section-team-summary h2 {
+  font-family: 'Pacifico', cursive;
+  color: #db2777;
+  margin-bottom: 20px;
+}
+
+/* Download button */
+
+.summary-actions {
+  margin-bottom: 20px;
+}
+
+#download-team-summary {
+  background: linear-gradient(
+    145deg,
+    #fbcfe8,
+    #f9a8d4
+  );
+
+  color: #1e1b2e;
+  font-weight: 700;
+
+  padding: 12px 20px;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 8px 18px rgba(244,114,182,0.25);
+
+  transition: all 0.25s ease;
+}
+
+#download-team-summary:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 24px rgba(244,114,182,0.35);
+}
+
+/* Card */
+
+#section-team-summary .stat-card {
+
+  background: rgba(255,255,255,0.75);
+
+  backdrop-filter: blur(12px);
+
+  border: 1px solid #fbcfe8;
+
+  border-radius: 20px;
+
+  padding: 20px;
+
+  overflow: hidden;
+}
+
+/* Table */
+
+#team-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Header */
+
+#team-summary-table thead {
+  background: linear-gradient(
+    145deg,
+    #fff0f6,
+    #ffe4ec
+  );
+}
+
+#team-summary-table th {
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  color: #64748b;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  padding: 16px;
+}
+
+/* Rows */
+
+#team-summary-table td {
+
+  padding: 18px 16;
+
+}
+
+/* ==================================
+   KPI COLORS
+================================== */
+
+#team-summary-table td.kpi-pass {
+    background: #c8e6c9 !important;
+    color: #006400 !important;
+    font-weight: 800;
+}
+
+#team-summary-table td.kpi-warning {
+    background: #fff59d !important;
+    color: #8b6b00 !important;
+    font-weight: 800;
+}
+
+#team-summary-table td.kpi-fail {
+    background: #efb7bd !important;
+    color: #b00020 !important;
+    font-weight: 800;
+}
+
+.kpi-pill {
+
+    display: inline-block;
+
+    min-width: 90px;
+
+    padding: 8px 14px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    font-weight: 800;
+
+    transition: 0.25s ease;
+}
+
+.kpi-pass {
+
+    background: #d9f2d9;
+
+    color: #006400;
+
+    border: 1px solid #7bc67b;
+}
+
+.kpi-warning {
+
+    background: #fff4b3;
+
+    color: #8b6b00;
+
+    border: 1px solid #e0c44c;
+}
+
+.kpi-fail {
+
+    background: #f8cfd4;
+
+    color: #b00020;
+
+    border: 1px solid #e1929b;
+}
+
+.kpi-pill:hover {
+    transform: scale(1.08);
+}
+
+
 
 

@@ -671,12 +671,55 @@ for (const member of members) {
     const row =
         document.createElement("tr");
 
-    row.innerHTML = `
-        <td>${member.name}</td>
-        <td>${current?.QA ?? "-"}</td>
-        <td>${current?.Attendance ?? "-"}</td>
-        <td>${current?.AHT ?? "-"}</td>
-    `;
+const qa = current?.QA;
+const att = current?.Attendance;
+const aht = current?.AHT;
+
+const qaClass =
+    qa >= 98
+        ? "kpi-pass"
+        : "kpi-fail";
+
+const attClass =
+    att >= 95
+        ? "kpi-pass"
+        : "kpi-fail";
+
+let ahtClass = "";
+
+if (aht <= App.data.targets.AHT.QPB) {
+    ahtClass = "kpi-pass";
+}
+else if (aht <= App.data.targets.AHT.HCPO) {
+    ahtClass = "kpi-warning";
+}
+else {
+    ahtClass = "kpi-fail";
+}
+
+row.innerHTML = `
+    <td class="agent-name">
+        ${member.name}
+    </td>
+
+<td>
+    <span class="kpi-pill ${qaClass}">
+        ${qa ?? "-"}
+    </span>
+</td>
+
+<td>
+    <span class="kpi-pill ${attClass}">
+        ${att ?? "-"}
+    </span>
+</td>
+
+<td>
+    <span class="kpi-pill ${ahtClass}">
+        ${aht ?? "-"}
+    </span>
+</td>
+`;
 
     body.appendChild(row);
 
