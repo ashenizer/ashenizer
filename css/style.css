@@ -2877,7 +2877,7 @@ img {
 
   border-radius: 20px;
 
-  padding: 20px;
+  padding: 12px;
 
   overflow: hidden;
 }
@@ -2885,41 +2885,72 @@ img {
 /* Table */
 
 #team-summary-table {
-  width: 100%;
+    width: auto;
+    width: 100%;
   border-collapse: collapse;
+font-size: 17px;
+  table-layout: fixed;
+  border-collapse: collapse;
 }
 
 /* Header */
 
 #team-summary-table thead {
-  background: linear-gradient(
-    145deg,
-    #fff0f6,
-    #ffe4ec
-  );
+  background: #fbbf24;
+
+  border-bottom: 3px solid #db2777;
+}
+
+#team-summary-table td,
+#team-summary-table th {
+  padding: 4px;
 }
 
 #team-summary-table th {
+  font-size: 22px;
+  font-weight: 900;
 
-  font-size: 13px;
-
-  font-weight: 800;
-
-  color: #64748b;
-
-  letter-spacing: 1px;
+  color: #111827;
 
   text-transform: uppercase;
 
-  padding: 16px;
+  letter-spacing: 1.5px;
+
+  padding: 18px 10px;
 }
 
 /* Rows */
 
 #team-summary-table td {
 
-  padding: 18px 16;
+  padding: 8px 16px;
 
+}
+
+#team-summary-table td:first-child {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#team-summary-table tr {
+  height: 60px;
+}
+
+.agent-name {
+    width: 35%;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#team-summary-table th,
+#team-summary-table td {
+    text-align: center;
+}
+
+#team-summary-table col:nth-child(2),
+#team-summary-table col:nth-child(3),
+#team-summary-table col:nth-child(4) {
+    width: 140px;
 }
 
 /* ==================================
@@ -2945,20 +2976,14 @@ img {
 }
 
 .kpi-pill {
+    display: block;
 
-    display: inline-block;
+    width: 100%;
+    height: 100%;
 
-    min-width: 90px;
+    padding: 12px 0;
 
-    padding: 8px 14px;
-
-    border-radius: 12px;
-
-    text-align: center;
-
-    font-weight: 800;
-
-    transition: 0.25s ease;
+    border-radius: 0;
 }
 
 .kpi-pass {

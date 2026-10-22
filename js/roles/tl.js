@@ -625,6 +625,23 @@ App.tl.loadTeamSummary = async function () {
 
     console.log("🚀 TEAM SUMMARY CLICKED");
 
+const monthTitle =
+    document.getElementById(
+        "team-summary-month-title"
+    );
+
+if (monthTitle) {
+
+    const month =
+        new Date().toLocaleString(
+            "en-US",
+            { month: "long" }
+        );
+
+    monthTitle.textContent =
+        `${month} Scores`;
+}
+
     const body =
         document.getElementById(
             "team-summary-body"
@@ -658,10 +675,34 @@ for (const member of members) {
         member.name
     );
 
-    const current =
-        App.data.statsStore[
-            member.email
-        ]?.current;
+const history =
+    App.data.statsStore[
+        member.email
+    ]?.history || [];
+
+const now = new Date();
+
+const currentMonthEntries =
+    history.filter(entry => {
+
+        if (!entry.date) return false;
+
+        const entryDate =
+            new Date(entry.date);
+
+        return (
+            entryDate.getMonth() === now.getMonth() &&
+            entryDate.getFullYear() === now.getFullYear()
+        );
+    });
+
+const current =
+    currentMonthEntries
+        .sort(
+            (a,b) =>
+                new Date(b.date) -
+                new Date(a.date)
+        )[0];
 
     console.log(
         "CURRENT:",
